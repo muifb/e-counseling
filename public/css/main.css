@@ -1,0 +1,39 @@
+.upload{
+    width: 100px;
+    height: 100px;
+}
+
+.img-view-profile{
+    width: 120;
+    height: 120;
+}
+
+trix-toolbar [data-trix-button-group="file-tools"]{
+    display: none;
+}
+
+/* start */
+.stars {
+    display: inline-block;
+    align-items: center;
+    gap: 25px;
+}
+
+.stars i {
+    color: #c2c2c2;
+    font-size: 27px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.stars i.active {
+    color: #ff9c1a;
+}
+
+.nav-item .nav-link .badge-numb {
+    position: relative;
+    inset: -5px -2px auto auto;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 3px 6px;
+}
