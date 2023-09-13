@@ -223,7 +223,6 @@
                                         <div class="col-sm-9">
                                             <div class="row ps-3 rounded" id="imagePreview">
                                                 @for ($i = 1; $i <= 4; $i++)
-                                                    {{-- {{ $i }} --}}
                                                     <label class="btn col-sm-1 mb-1 photo-agama{{ $i }}"
                                                         for="photoAgama{{ $i }}">
                                                         <i
@@ -232,12 +231,11 @@
                                                     <input class="form-control" type="file"
                                                         id="photoAgama{{ $i }}" style="display: none;"
                                                         name="photo_agama[]" multiple
-                                                        onchange="previewImageAgama{{ $i }}()">
+                                                        onchange="previewImageAgama({{ $i }})">
                                                 @endfor
                                             </div>
                                             @error('photo_agama*')
                                                 <p class="text-danger">
-                                                    {{-- {{ $message }} --}}
                                                     Foto harus berupa gambar (jpg, jpeg, png, gif, svg, atau webp)!. dan tidak
                                                     boleh
                                                     lebih
@@ -302,12 +300,11 @@
                                                     <input class="form-control" type="file"
                                                         id="photoMotorik{{ $iMotorik }}" style="display: none;"
                                                         name="photo_motorik[]" multiple
-                                                        onchange="previewImageMotorik{{ $iMotorik }}()">
+                                                        onchange="previewImageMotorik({{ $iMotorik }})">
                                                 @endfor
                                             </div>
                                             @error('photo_motorik*')
                                                 <p class="text-danger">
-                                                    {{-- {{ $message }} --}}
                                                     Foto harus berupa gambar (jpg, jpeg, png, gif, svg, atau webp)!. dan tidak
                                                     boleh
                                                     lebih
@@ -372,7 +369,7 @@
                                                 <input class="form-control" type="file"
                                                     id="photoKognitif{{ $iKognitif }}" style="display: none;"
                                                     name="photo_kognitif[]" multiple
-                                                    onchange="previewImageKognitif{{ $iKognitif }}()">
+                                                    onchange="previewImageKognitif({{ $iKognitif }})">
                                             @endfor
                                         </div>
                                         @error('photo_kognitif*')
@@ -430,7 +427,7 @@
                                         </label>
                                         <input class="form-control" type="file" id="photoSosial{{ $iSosial }}"
                                             style="display: none;" name="photo_sosial[]" multiple
-                                            onchange="previewImageSosial{{ $iSosial }}()">
+                                            onchange="previewImageSosial({{ $iSosial }})">
                                     @endfor
                                 </div>
                                 @error('photo_sosial*')
@@ -494,7 +491,7 @@
                                         </label>
                                         <input class="form-control" type="file" id="photoBahasa{{ $iBahasa }}"
                                             style="display: none;" name="photo_bahasa[]" multiple
-                                            onchange="previewImageBahasa{{ $iBahasa }}()">
+                                            onchange="previewImageBahasa({{ $iBahasa }})">
                                     @endfor
                                 </div>
                                 @error('photo_bahasa*')
@@ -563,7 +560,7 @@
                                         </label>
                                         <input class="form-control" type="file" id="photoSeni{{ $iSeni }}"
                                             style="display: none;" name="photo_seni[]" multiple
-                                            onchange="previewImageSeni{{ $iSeni }}()">
+                                            onchange="previewImageSeni({{ $iSeni }})">
                                     @endfor
                                 </div>
                                 @error('photo_seni*')
@@ -755,14 +752,13 @@
                             <div class="col-sm-9">
                                 <div class="row ps-3 rounded" id="imagePreview">
                                     @for ($i = 1; $i <= 4; $i++)
-                                        {{-- {{ $i }} --}}
                                         <label class="btn col-sm-1 mb-1 photo-agama{{ $i }}"
                                             for="photoAgama{{ $i }}">
                                             <i class="bi bi-plus-square fs-1 img-preview-agama{{ $i }}"></i>
                                         </label>
                                         <input class="form-control" type="file" id="photoAgama{{ $i }}"
                                             style="display: none;" name="photo_agama[]" multiple
-                                            onchange="previewImageAgama{{ $i }}()">
+                                            onchange="previewImageAgama({{ $i }})">
                                     @endfor
                                 </div>
                                 @error('photo_agama*')
@@ -827,7 +823,7 @@
                                         </label>
                                         <input class="form-control" type="file" id="photoMotorik{{ $iMotorik }}"
                                             style="display: none;" name="photo_motorik[]" multiple
-                                            onchange="previewImageMotorik{{ $iMotorik }}()">
+                                            onchange="previewImageMotorik({{ $iMotorik }})">
                                     @endfor
                                 </div>
                                 @error('photo_motorik*')
@@ -893,7 +889,7 @@
                                         <input class="form-control" type="file"
                                             id="photoKognitif{{ $iKognitif }}" style="display: none;"
                                             name="photo_kognitif[]" multiple
-                                            onchange="previewImageKognitif{{ $iKognitif }}()">
+                                            onchange="previewImageKognitif({{ $iKognitif }})">
                                     @endfor
                                 </div>
                                 @error('photo_kognitif*')
@@ -949,7 +945,7 @@
                                         </label>
                                         <input class="form-control" type="file" id="photoSosial{{ $iSosial }}"
                                             style="display: none;" name="photo_sosial[]" multiple
-                                            onchange="previewImageSosial{{ $iSosial }}()">
+                                            onchange="previewImageSosial({{ $iSosial }})">
                                     @endfor
                                 </div>
                                 @error('photo_sosial*')
@@ -1010,7 +1006,7 @@
                                         </label>
                                         <input class="form-control" type="file" id="photoBahasa{{ $iBahasa }}"
                                             style="display: none;" name="photo_bahasa[]" multiple
-                                            onchange="previewImageBahasa{{ $iBahasa }}()">
+                                            onchange="previewImageBahasa({{ $iBahasa }})">
                                     @endfor
                                 </div>
                                 @error('photo_bahasa*')
@@ -1074,7 +1070,7 @@
                                         </label>
                                         <input class="form-control" type="file" id="photoSeni{{ $iSeni }}"
                                             style="display: none;" name="photo_seni[]" multiple
-                                            onchange="previewImageSeni{{ $iSeni }}()">
+                                            onchange="previewImageSeni({{ $iSeni }})">
                                     @endfor
                                 </div>
                                 @error('photo_seni*')

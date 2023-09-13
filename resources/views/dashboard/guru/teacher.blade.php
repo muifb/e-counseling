@@ -8,11 +8,14 @@
                     <div class="card">
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                             @if ($data->photo)
-                                <img src="{{ asset('storage/' . $data->photo) }}" alt="Profile"
-                                    class="img-preview img-thumbnail rounded-circle col-md-7 img-fluid mb-3">
+                                <div class="rounded-circle mb-3" style="max-height: 200px; overflow:hidden;">
+                                    <img src="{{ asset('storage/' . $data->photo) }}" alt="Profile" class="img-preview"
+                                        width="200px">
+                                </div>
                             @else
-                                <img src="/img/profile.jpg" alt="Profile"
-                                    class="img-preview img-thumbnail rounded-circle col-md-7 img-fluid mb-3">
+                                <div class="rounded-circle mb-3" style="max-height: 200px; overflow:hidden;">
+                                    <img src="/img/profile.jpg" alt="Profile" class="img-preview" width="200px">
+                                </div>
                             @endif
                             <label class="btn btn-primary btn-sm" title="Upload new image" for="photo">
                                 <i class="bi bi-upload"></i>
@@ -114,11 +117,13 @@
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
                             @if ($data->photo)
-                                <img src="{{ asset('storage/' . $data->photo) }}" alt="Profile"
-                                    class="img-thumbnail rounded-circle col-md-7 img-fluid mb-3">
+                                <div class="rounded-circle mb-3" style="max-height: 200px; overflow:hidden;">
+                                    <img src="{{ asset('storage/' . $data->photo) }}" alt="Profile" width="200px">
+                                </div>
                             @else
-                                <img src="/img/profile.jpg" alt="Profile"
-                                    class="img-thumbnail rounded-circle col-md-7 img-fluid mb-3">
+                                <div class="rounded-circle mb-3" style="max-height: 200px; overflow:hidden;">
+                                    <img src="/img/profile.jpg" alt="Profile" width="200px">
+                                </div>
                             @endif
                             <h2 class="text-center"></h2>
                         </div>

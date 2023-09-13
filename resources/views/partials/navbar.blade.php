@@ -34,7 +34,7 @@
                 <li class="dropdown">
                     <a href="#" class="getstarted">
                         <span>
-                            {{ auth()->user()->nama }}
+                            {{ ucwords(strtolower(auth()->user()->nama)) }}
                         </span>
                         <i class="bi bi-chevron-down"></i>
                     </a>

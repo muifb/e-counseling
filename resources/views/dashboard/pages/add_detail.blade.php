@@ -171,7 +171,7 @@
                                         </label>
                                         <input class="form-control" type="file" id="photo{{ $i }}"
                                             style="display: none;" name="photo[]" multiple
-                                            onchange="previewImage{{ $i }}()">
+                                            onchange="previewImage({{ $i }})">
                                     @endfor
                                 </div>
                                 @error('photo*')

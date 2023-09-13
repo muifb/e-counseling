@@ -84,17 +84,19 @@ class ReportController extends Controller
             foreach ($imagesagama as $imgAgama) {
                 $type = $imgAgama->getMimeType();
                 if ($type == 'video/mp4' || $type == 'video/mp4v' || $type == 'video/mpg4' || $type == 'video/avi' || $type == 'video/movie' || $type == 'video/mov') {
-                    $videoAgama = $imgAgama->store('files-reports/video/nilai-agama');
+                    $videoAgama = $imgAgama->store('files-reports/nilai-agama');
                     DetailReport::create([
                         'file_fotovideo' => $videoAgama,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'video'
                     ]);
                 }
                 if ($type == 'image/jpg' || $type == 'image/jpeg' || $type == 'image/png' || $type == 'image/gif' || $type == 'image/svg' || $type == 'image/webp') {
-                    $imageAgama = $imgAgama->store('files-reports/image/nilai-agama');
+                    $imageAgama = $imgAgama->store('files-reports/nilai-agama');
                     DetailReport::create([
                         'file_fotovideo' => $imageAgama,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'image'
                     ]);
                 }
             }
@@ -104,17 +106,19 @@ class ReportController extends Controller
             foreach ($imagesmotorik as $imgMotorik) {
                 $type = $imgMotorik->getMimeType();
                 if ($type == 'video/mp4' || $type == 'video/mp4v' || $type == 'video/mpg4' || $type == 'video/avi' || $type == 'video/movie' || $type == 'video/mov') {
-                    $videoMotorik = $imgMotorik->store('files-reports/video/nilai-motorik');
+                    $videoMotorik = $imgMotorik->store('files-reports/nilai-motorik');
                     DetailReport::create([
                         'file_fotovideo' => $videoMotorik,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'video'
                     ]);
                 }
                 if ($type == 'image/jpg' || $type == 'image/jpeg' || $type == 'image/png' || $type == 'image/gif' || $type == 'image/svg' || $type == 'image/webp') {
-                    $imageMotorik = $imgMotorik->store('files-reports/image/nilai-motorik');
+                    $imageMotorik = $imgMotorik->store('files-reports/nilai-motorik');
                     DetailReport::create([
                         'file_fotovideo' => $imageMotorik,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'image'
                     ]);
                 }
             }
@@ -124,17 +128,19 @@ class ReportController extends Controller
             foreach ($imageskognitif as $imgKognitif) {
                 $type = $imgKognitif->getMimeType();
                 if ($type == 'video/mp4' || $type == 'video/mp4v' || $type == 'video/mpg4' || $type == 'video/avi' || $type == 'video/movie' || $type == 'video/mov') {
-                    $videoKognitif = $imgKognitif->store('files-reports/video/nilai-kognitif');
+                    $videoKognitif = $imgKognitif->store('files-reports/nilai-kognitif');
                     DetailReport::create([
                         'file_fotovideo' => $videoKognitif,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'video'
                     ]);
                 }
                 if ($type == 'image/jpg' || $type == 'image/jpeg' || $type == 'image/png' || $type == 'image/gif' || $type == 'image/svg' || $type == 'image/webp') {
-                    $imageKognitif = $imgKognitif->store('files-reports/image/nilai-kognitif');
+                    $imageKognitif = $imgKognitif->store('files-reports/nilai-kognitif');
                     DetailReport::create([
                         'file_fotovideo' => $imageKognitif,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'image'
                     ]);
                 }
             }
@@ -144,17 +150,19 @@ class ReportController extends Controller
             foreach ($imagessosial as $imgSosial) {
                 $type = $imgSosial->getMimeType();
                 if ($type == 'video/mp4' || $type == 'video/mp4v' || $type == 'video/mpg4' || $type == 'video/avi' || $type == 'video/movie' || $type == 'video/mov') {
-                    $videoSosial = $imgSosial->store('files-reports/video/nilai-sosial');
+                    $videoSosial = $imgSosial->store('files-reports/nilai-sosial');
                     DetailReport::create([
                         'file_fotovideo' => $videoSosial,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'video'
                     ]);
                 }
                 if ($type == 'image/jpg' || $type == 'image/jpeg' || $type == 'image/png' || $type == 'image/gif' || $type == 'image/svg' || $type == 'image/webp') {
-                    $imageSosial = $imgSosial->store('files-reports/image/nilai-sosial');
+                    $imageSosial = $imgSosial->store('files-reports/nilai-sosial');
                     DetailReport::create([
                         'file_fotovideo' => $imageSosial,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'image'
                     ]);
                 }
             }
@@ -164,17 +172,19 @@ class ReportController extends Controller
             foreach ($imagesbahasa as $imgBahasa) {
                 $type = $imgBahasa->getMimeType();
                 if ($type == 'video/mp4' || $type == 'video/mp4v' || $type == 'video/mpg4' || $type == 'video/avi' || $type == 'video/movie' || $type == 'video/mov') {
-                    $videoBahasa = $imgBahasa->store('files-reports/video/nilai-bahasa');
+                    $videoBahasa = $imgBahasa->store('files-reports/nilai-bahasa');
                     DetailReport::create([
                         'file_fotovideo' => $videoBahasa,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'video'
                     ]);
                 }
                 if ($type == 'image/jpg' || $type == 'image/jpeg' || $type == 'image/png' || $type == 'image/gif' || $type == 'image/svg' || $type == 'image/webp') {
-                    $imageBahasa = $imgBahasa->store('files-reports/image/nilai-bahasa');
+                    $imageBahasa = $imgBahasa->store('files-reports/nilai-bahasa');
                     DetailReport::create([
                         'file_fotovideo' => $imageBahasa,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'image'
                     ]);
                 }
             }
@@ -184,17 +194,19 @@ class ReportController extends Controller
             foreach ($imagesseni as $imgSeni) {
                 $type = $imgSeni->getMimeType();
                 if ($type == 'video/mp4' || $type == 'video/mp4v' || $type == 'video/mpg4' || $type == 'video/avi' || $type == 'video/movie' || $type == 'video/mov') {
-                    $videoSeni = $imgSeni->store('files-reports/video/nilai-seni');
+                    $videoSeni = $imgSeni->store('files-reports/nilai-seni');
                     DetailReport::create([
                         'file_fotovideo' => $videoSeni,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'video'
                     ]);
                 }
                 if ($type == 'image/jpg' || $type == 'image/jpeg' || $type == 'image/png' || $type == 'image/gif' || $type == 'image/svg' || $type == 'image/webp') {
-                    $imageSeni = $imgSeni->store('files-reports/image/nilai-seni');
+                    $imageSeni = $imgSeni->store('files-reports/nilai-seni');
                     DetailReport::create([
                         'file_fotovideo' => $imageSeni,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'image'
                     ]);
                 }
             }
@@ -231,7 +243,6 @@ class ReportController extends Controller
 
     public function showReport(Report $report)
     {
-        // return $report;
         return view('dashboard.rapor.detail_report', [
             'report' => $report,
         ]);
@@ -314,6 +325,7 @@ class ReportController extends Controller
 
     public function update(Request $request, Report $report)
     {
+        // ddd($request);
         $validatedData = $request->validate([
             'semester' => 'required',
             'nilai_agama' => 'required',
@@ -328,6 +340,12 @@ class ReportController extends Controller
             'photo_sosial.*' => 'mimes:mp4,mp4v,mpg4,avi,movie,mov,jpg,jpeg,png,gif,svg,webp',
             'photo_bahasa.*' => 'mimes:mp4,mp4v,mpg4,avi,movie,mov,jpg,jpeg,png,gif,svg,webp',
             'photo_seni.*' => 'mimes:mp4,mp4v,mpg4,avi,movie,mov,jpg,jpeg,png,gif,svg,webp',
+            // 'file_agama_edit.*' => 'mimes:mp4,mp4v,mpg4,avi,movie,mov,jpg,jpeg,png,gif,svg,webp',
+            // 'file_motorik_edit.*' => 'mimes:mp4,mp4v,mpg4,avi,movie,mov,jpg,jpeg,png,gif,svg,webp',
+            // 'file_kognitif_edit.*' => 'mimes:mp4,mp4v,mpg4,avi,movie,mov,jpg,jpeg,png,gif,svg,webp',
+            // 'file_sosial_edit.*' => 'mimes:mp4,mp4v,mpg4,avi,movie,mov,jpg,jpeg,png,gif,svg,webp',
+            // 'file_bahasa_edit.*' => 'mimes:mp4,mp4v,mpg4,avi,movie,mov,jpg,jpeg,png,gif,svg,webp',
+            // 'file_seni_edit.*' => 'mimes:mp4,mp4v,mpg4,avi,movie,mov,jpg,jpeg,png,gif,svg,webp',
         ]);
 
         $validatedData['siswa_id'] = $request['siswa_id'];
@@ -336,22 +354,6 @@ class ReportController extends Controller
         // $validatedData['kelompok_id'] = $request['kelompok_id'];
         $cekReport = Report::where('siswa_id', $validatedData['siswa_id'])->get();
         $siswa = Siswa::find($request['siswa_id']);
-
-        // if ($cekReport->count()) {
-        //     foreach ($cekReport as $cek) {
-        //         if ($validatedData['siswa_id'] == $cek->siswa_id && $validatedData['semester'] == $cek->semester) {
-        //             if ($cek->status == 'menunggu') {
-        //                 return back()
-        //                     ->withErrors(['semester' => 'Raport siswa ' . $siswa->nama . ' semester ' . $validatedData['semester'] . ' sudah diinputkan dan menunggu persetujuan!.'])
-        //                     ->withInput($validatedData);
-        //             } else {
-        //                 return back()
-        //                     ->withErrors(['semester' => 'Raport siswa ' . $siswa->nama . ' semester ' . $validatedData['semester'] . ' sudah diinputkan!.'])
-        //                     ->withInput($validatedData);
-        //             }
-        //         }
-        //     }
-        // }
 
         Report::where('id', $report->id)
             ->update([
@@ -371,17 +373,19 @@ class ReportController extends Controller
             foreach ($imagesagama as $imgAgama) {
                 $type = $imgAgama->getMimeType();
                 if ($type == 'video/mp4' || $type == 'video/mp4v' || $type == 'video/mpg4' || $type == 'video/avi' || $type == 'video/movie' || $type == 'video/mov') {
-                    $videoAgama = $imgAgama->store('files-reports/video/nilai-agama');
+                    $videoAgama = $imgAgama->store('files-reports/nilai-agama');
                     DetailReport::create([
                         'file_fotovideo' => $videoAgama,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'video'
                     ]);
                 }
                 if ($type == 'image/jpg' || $type == 'image/jpeg' || $type == 'image/png' || $type == 'image/gif' || $type == 'image/svg' || $type == 'image/webp') {
-                    $imageAgama = $imgAgama->store('files-reports/image/nilai-agama');
+                    $imageAgama = $imgAgama->store('files-reports/nilai-agama');
                     DetailReport::create([
                         'file_fotovideo' => $imageAgama,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'image'
                     ]);
                 }
             }
@@ -391,17 +395,19 @@ class ReportController extends Controller
             foreach ($imagesmotorik as $imgMotorik) {
                 $type = $imgMotorik->getMimeType();
                 if ($type == 'video/mp4' || $type == 'video/mp4v' || $type == 'video/mpg4' || $type == 'video/avi' || $type == 'video/movie' || $type == 'video/mov') {
-                    $videoMotorik = $imgMotorik->store('files-reports/video/nilai-motorik');
+                    $videoMotorik = $imgMotorik->store('files-reports/nilai-motorik');
                     DetailReport::create([
                         'file_fotovideo' => $videoMotorik,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'video'
                     ]);
                 }
                 if ($type == 'image/jpg' || $type == 'image/jpeg' || $type == 'image/png' || $type == 'image/gif' || $type == 'image/svg' || $type == 'image/webp') {
-                    $imageMotorik = $imgMotorik->store('files-reports/image/nilai-motorik');
+                    $imageMotorik = $imgMotorik->store('files-reports/nilai-motorik');
                     DetailReport::create([
                         'file_fotovideo' => $imageMotorik,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'image'
                     ]);
                 }
             }
@@ -411,17 +417,19 @@ class ReportController extends Controller
             foreach ($imageskognitif as $imgKognitif) {
                 $type = $imgKognitif->getMimeType();
                 if ($type == 'video/mp4' || $type == 'video/mp4v' || $type == 'video/mpg4' || $type == 'video/avi' || $type == 'video/movie' || $type == 'video/mov') {
-                    $videoKognitif = $imgKognitif->store('files-reports/video/nilai-kognitif');
+                    $videoKognitif = $imgKognitif->store('files-reports/nilai-kognitif');
                     DetailReport::create([
                         'file_fotovideo' => $videoKognitif,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'video'
                     ]);
                 }
                 if ($type == 'image/jpg' || $type == 'image/jpeg' || $type == 'image/png' || $type == 'image/gif' || $type == 'image/svg' || $type == 'image/webp') {
-                    $imageKognitif = $imgKognitif->store('files-reports/image/nilai-kognitif');
+                    $imageKognitif = $imgKognitif->store('files-reports/nilai-kognitif');
                     DetailReport::create([
                         'file_fotovideo' => $imageKognitif,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'image'
                     ]);
                 }
             }
@@ -431,17 +439,19 @@ class ReportController extends Controller
             foreach ($imagessosial as $imgSosial) {
                 $type = $imgSosial->getMimeType();
                 if ($type == 'video/mp4' || $type == 'video/mp4v' || $type == 'video/mpg4' || $type == 'video/avi' || $type == 'video/movie' || $type == 'video/mov') {
-                    $videoSosial = $imgSosial->store('files-reports/video/nilai-sosial');
+                    $videoSosial = $imgSosial->store('files-reports/nilai-sosial');
                     DetailReport::create([
                         'file_fotovideo' => $videoSosial,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'video'
                     ]);
                 }
                 if ($type == 'image/jpg' || $type == 'image/jpeg' || $type == 'image/png' || $type == 'image/gif' || $type == 'image/svg' || $type == 'image/webp') {
-                    $imageSosial = $imgSosial->store('files-reports/image/nilai-sosial');
+                    $imageSosial = $imgSosial->store('files-reports/nilai-sosial');
                     DetailReport::create([
                         'file_fotovideo' => $imageSosial,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'image'
                     ]);
                 }
             }
@@ -451,17 +461,19 @@ class ReportController extends Controller
             foreach ($imagesbahasa as $imgBahasa) {
                 $type = $imgBahasa->getMimeType();
                 if ($type == 'video/mp4' || $type == 'video/mp4v' || $type == 'video/mpg4' || $type == 'video/avi' || $type == 'video/movie' || $type == 'video/mov') {
-                    $videoBahasa = $imgBahasa->store('files-reports/video/nilai-bahasa');
+                    $videoBahasa = $imgBahasa->store('files-reports/nilai-bahasa');
                     DetailReport::create([
                         'file_fotovideo' => $videoBahasa,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'video'
                     ]);
                 }
                 if ($type == 'image/jpg' || $type == 'image/jpeg' || $type == 'image/png' || $type == 'image/gif' || $type == 'image/svg' || $type == 'image/webp') {
-                    $imageBahasa = $imgBahasa->store('files-reports/image/nilai-bahasa');
+                    $imageBahasa = $imgBahasa->store('files-reports/nilai-bahasa');
                     DetailReport::create([
                         'file_fotovideo' => $imageBahasa,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'image'
                     ]);
                 }
             }
@@ -471,17 +483,19 @@ class ReportController extends Controller
             foreach ($imagesseni as $imgSeni) {
                 $type = $imgSeni->getMimeType();
                 if ($type == 'video/mp4' || $type == 'video/mp4v' || $type == 'video/mpg4' || $type == 'video/avi' || $type == 'video/movie' || $type == 'video/mov') {
-                    $videoSeni = $imgSeni->store('files-reports/video/nilai-seni');
+                    $videoSeni = $imgSeni->store('files-reports/nilai-seni');
                     DetailReport::create([
                         'file_fotovideo' => $videoSeni,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'video'
                     ]);
                 }
                 if ($type == 'image/jpg' || $type == 'image/jpeg' || $type == 'image/png' || $type == 'image/gif' || $type == 'image/svg' || $type == 'image/webp') {
-                    $imageSeni = $imgSeni->store('files-reports/image/nilai-seni');
+                    $imageSeni = $imgSeni->store('files-reports/nilai-seni');
                     DetailReport::create([
                         'file_fotovideo' => $imageSeni,
-                        'report_id' => $report->id
+                        'report_id' => $report->id,
+                        'tipe_file' => 'image'
                     ]);
                 }
             }

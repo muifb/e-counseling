@@ -16,6 +16,7 @@ class CreateDetailReport extends Migration
         Schema::create('detailreport', function (Blueprint $table) {
             $table->id();
             $table->foreignId('report_id')->nullable();
+            $table->string('tipe_file');
             $table->text('file_fotovideo')->nullable();
             $table->timestamps();
         });
