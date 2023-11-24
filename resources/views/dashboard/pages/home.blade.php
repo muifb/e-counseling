@@ -88,40 +88,41 @@
                             </div>
                         </a>
                     @endforeach
-                    {{-- @if (!$kelompok->where('guru_id', auth()->user()->guru->id)->count()) --}}
-                    {{-- @foreach ($jadwalPendamping as $item) --}}
-                    <a href="/administrator/kelompok/siswa/{{ $jadwalPendamping->first()->kelompok_id }}" class="col-md-3 col-md-3">
-                        <div class="card info-card sales-card">
+                    @if (!$kelompok->where('guru_id', auth()->user()->guru->id)->count())
+                        @foreach ($jadwalPendamping as $item)
+                            <a href="/administrator/kelompok/siswa/{{ $jadwalPendamping->first()->kelompok_id }}"
+                                class="col-md-3 col-md-3">
+                                <div class="card info-card sales-card">
 
-                            <div class="card-body">
-                                <h5 class="card-title">Kelompok <span>|
-                                        {{ $jadwalPendamping->first()->kelompok->nama_kelompok }}</span></h5>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Kelompok <span>|
+                                                {{ $jadwalPendamping->first()->kelompok->nama_kelompok }}</span></h5>
 
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="ri-user-follow-line"></i>
+                                        <div class="d-flex align-items-center">
+                                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                <i class="ri-user-follow-line"></i>
+                                            </div>
+                                            <div class="ps-2">
+                                                <h6>{{ count($data->where('kelompok_id', $jadwalPendamping->first()->id)) }}</h6>
+                                                <span class="text-success small pt-1 fw-bold">Penghuni</span>
+                                            </div>
+                                            <div class="ps-3">
+                                                <span class="text-muted small d-flex">
+                                                    {{ count($data->where('kelompok_id', $jadwalPendamping->first()->id)->where('jk_siswa', 'Laki-Laki')) }}
+                                                    Laki-laki
+                                                </span>
+                                                <span class="text-muted small d-flex">
+                                                    {{ count($data->where('kelompok_id', $jadwalPendamping->first()->id)->where('jk_siswa', 'Perempuan')) }}
+                                                    Perempuan
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="ps-2">
-                                        <h6>{{ count($data->where('kelompok_id', $jadwalPendamping->first()->id)) }}</h6>
-                                        <span class="text-success small pt-1 fw-bold">Penghuni</span>
-                                    </div>
-                                    <div class="ps-3">
-                                        <span class="text-muted small d-flex">
-                                            {{ count($data->where('kelompok_id', $jadwalPendamping->first()->id)->where('jk_siswa', 'Laki-Laki')) }}
-                                            Laki-laki
-                                        </span>
-                                        <span class="text-muted small d-flex">
-                                            {{ count($data->where('kelompok_id', $jadwalPendamping->first()->id)->where('jk_siswa', 'Perempuan')) }}
-                                            Perempuan
-                                        </span>
-                                    </div>
+
                                 </div>
-                            </div>
-
-                        </div>
-                    </a>
-                    {{-- @endforeach --}}
-                    {{-- @endif --}}
+                            </a>
+                        @endforeach
+                    @endif
                 @endcan
                 @can('akses', 'kepsek')
                     @foreach ($kelompok as $item)

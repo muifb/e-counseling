@@ -53,7 +53,7 @@
                                                 @if ($d->report->count())
                                                     @if ($d->report->first()->status == 'ditolak')
                                                         <tr class="table-danger">
-                                                        @elseif($d->report->first()->status == 'menunggu')
+                                                        @elseif ($d->report->first()->status == 'menunggu')
                                                         <tr class="table-warning">
                                                         @else
                                                         <tr>
@@ -165,9 +165,14 @@
                                             <tbody>
                                                 @foreach ($data->where('kelompok_id', $item->id) as $d)
                                                     @if ($d->report->count())
-                                                        <tr
-                                                            class="{{ $d->report->first()->status == 'ditolak' ? 'table-danger' : '' }}">
-                                                        @else
+                                                        @if ($d->report->first()->status == 'ditolak')
+                                                            <tr class="table-danger">
+                                                            @elseif ($d->report->first()->status == 'menunggu')
+                                                            <tr class="table-warning">
+                                                            @else
+                                                            <tr>
+                                                        @endif
+                                                    @else
                                                         <tr>
                                                     @endif
                                                     <th scope="row">{{ $loop->iteration }}</th>
