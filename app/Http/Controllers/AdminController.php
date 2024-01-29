@@ -10,6 +10,7 @@ use App\Models\Jadwal;
 use App\Models\Kelompok;
 use Illuminate\Http\Request;
 use App\Models\KelompokSiswa;
+use App\Models\Semester;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
 use App\Traits\NotifikasiWhatsappTrait;
@@ -31,6 +32,8 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //  tampilan halaman jadwal
     public function create()
     {
 
@@ -105,6 +108,7 @@ class AdminController extends Controller
         }
     }
 
+    // menampilkan halaman tambah jadwal
     public function createJadwal(Kelompok $kelompok)
     {
         // return date('l');
@@ -167,6 +171,8 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //  proses simpan jadwal yang berhasil di input
     public function store(Request $request)
     {
         $validateData = $request->validate([
@@ -197,6 +203,7 @@ class AdminController extends Controller
         return redirect('/administrator/schedule/create')->with('success', 'Added schedule success!');
     }
 
+    // menampilkan halaman lihat jadwal
     public function showJadwal(Kelompok $kelompok)
     {
         $jadwal = Jadwal::where('kelompok_id', $kelompok->id)->latest()->get();
@@ -212,6 +219,8 @@ class AdminController extends Controller
      * @param  \App\Models\Jadwal  $jadwal
      * @return \Illuminate\Http\Response
      */
+
+    //  menampilkan data siswa yang masuk dalam kelompok
     public function show(Kelompok $kelompok)
     {
         $siswa = Siswa::where('kelompok_id', $kelompok->id)->get();
@@ -223,6 +232,7 @@ class AdminController extends Controller
         ]);
     }
 
+    // memasukkan siswa yang berhasil terdaftar pada sistem kedalam data kelompok ketika klik simpan 
     public function siswaMasukKelompok(Request $request)
     {
         $data = $request->validate([
@@ -249,6 +259,7 @@ class AdminController extends Controller
         return back()->with('success', "Berhasil hapus siswa dari kelompok");
     }
 
+    // menghapus siswa dari halaman kelompok
     public function hapusSiswaKelompok(Request $request, Kelompok $kelompok)
     {
         $siswa = Siswa::where('kelompok_id', $kelompok->id)->get();
@@ -266,6 +277,8 @@ class AdminController extends Controller
      * @param  \App\Models\Jadwal  $jadwal
      * @return \Illuminate\Http\Response
      */
+
+    //  menampilkan halaman edit jadwal
     public function edit(Jadwal $jadwal)
     {
         $g = [$jadwal->kelompok->guru_id];
@@ -293,6 +306,8 @@ class AdminController extends Controller
      * @param  \App\Models\Jadwal  $jadwal
      * @return \Illuminate\Http\Response
      */
+
+    //  proses mengedit jadwal
     public function update(Request $request, Jadwal $jadwal)
     {
         $validateData = $request->validate([
@@ -301,9 +316,9 @@ class AdminController extends Controller
             'sabtu' => 'required|string',
             'sub_sabtu' => 'required|string|min:5',
             'ket_sabtu' => 'nullable|string',
-            'minggu' => 'required|string',
-            'sub_minggu' => 'required|string|min:5',
-            'ket_minggu' => 'nullable|string',
+            'jumat' => 'required|string',
+            'sub_jumat' => 'required|string|min:5',
+            'ket_jumat' => 'nullable|string',
             'senin' => 'required|string',
             'sub_senin' => 'required|string|min:5',
             'ket_senin' => 'nullable|string',
@@ -329,6 +344,8 @@ class AdminController extends Controller
      * @param  \App\Models\Jadwal  $jadwal
      * @return \Illuminate\Http\Response
      */
+
+    //  proses hapus jadwal
     public function destroy(Jadwal $schedule)
     {
         Jadwal::destroy($schedule->id);
@@ -341,39 +358,45 @@ class AdminController extends Controller
         return back()->with('success', 'Tema has been deleted!');
     }
 
+    // menampilkan halaman tema
     public function tema()
     {
-        $sms = collect([
-            ['semester' => 'Gasal'],
-            ['semester' => 'Genap'],
-        ]);
+        // $sms = collect([
+        //     ['semester' => 'Gasal'],
+        //     ['semester' => 'Genap'],
+        // ]);
         return view('dashboard.tema.tema', [
             'tema' => Tema::all(),
-            'semester' => $sms,
+            'semester' => Semester::latest()->get(),
             'tahun' => Tahun::orderByDesc('tahun_ajaran')->get()
         ]);
     }
 
+    // proses menyimpan tema yang berhasil di input
     public function storeTema(Request $request)
     {
+        // return $request;
         $validateData = $request->validate([
-            'tahun_id' => 'required',
+            // 'tahun_id' => 'required',
             'nama_tema' => 'required',
             'sentra' => 'required',
             'semester' => 'required',
+            'pertemuan' => 'required|int'
         ]);
 
         Tema::create($validateData);
         return back()->with('success', 'Added tema success!.');
     }
 
+    // proses edit tema
     public function updateTema(Request $request)
     {
         $validateData = $request->validate([
-            'tahun_id' => 'required',
+            // 'tahun_id' => 'required',
             'nama_tema' => 'required',
             'sentra' => 'required',
             'semester' => 'required',
+            'pertemuan' => 'required|int'
         ]);
 
         Tema::where('id', $request->id)
@@ -381,6 +404,7 @@ class AdminController extends Controller
         return back()->with('success', 'Tema has been updated!');
     }
 
+    // proses mengedit kelompok
     public function updateKelompok(Request $request)
     {
         $validateData = $request->validate([
@@ -394,12 +418,15 @@ class AdminController extends Controller
             ]);
         return back()->with('success', 'Tema has been updated!');
     }
+
+    // membuka tombol edit tema yang dipilih pada halaman tema
     public function cekTema(Request $request)
     {
         $data = Tema::find($request->id);
         return response()->json($data);
     }
 
+    // proses menyimpan ketika tambah kelompok
     public function storeKelompok(Request $request)
     {
         // return $request;
@@ -413,6 +440,7 @@ class AdminController extends Controller
         return back()->with('success', 'success add kelompok');
     }
 
+    // membuka halaman kelompok
     public function kelompok()
     {
         $kel = Kelompok::orderBy('nama_kelompok')->get();
@@ -502,5 +530,33 @@ class AdminController extends Controller
         }
         echo '<a href="/dashboard">Kembali</a>';
         die;
+    }
+
+    public function semester()
+    {
+        return view('dashboard.semester.index', [
+            'tahun' => Tahun::orderBy('tahun_ajaran')->get(),
+            'semester' => Semester::latest()->get()
+        ]);
+    }
+
+    public function storeSemester(Request $request)
+    {
+        $request['semester'] = $request->sms . ' ' . $request->tahun;
+
+        $validateData = $request->validate([
+            'sms' => 'required',
+            'tahun' => 'required',
+            'semester' => 'unique:semesters,semester'
+        ]);
+
+        Semester::create(['semester' => $validateData['semester']]);
+        return back()->with('success', 'berhasil menambahkan semester!.');
+    }
+
+    public function destroySemester(Semester $semester)
+    {
+        Semester::destroy($semester->id);
+        return back()->with('success', 'Semester berhasil dihapus!');
     }
 }

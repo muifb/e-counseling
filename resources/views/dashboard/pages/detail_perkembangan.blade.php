@@ -51,12 +51,7 @@
                 <ul class="nav nav-tabs nav-tabs-bordered" style="--bs-breadcrumb-divider: '>>';">
 
                     <li class="breadcrumb">
-                        @can('akses', 'guru')
-                            <span class="breadcrumb-item"><a href="/dashboard/learnings">Siswa</a></span>
-                        @elsecan('akses', 'kepsek')
-                            <span class="breadcrumb-item"><a
-                                    href="/dashboard/evaluasi-pembelajaran/kelompok/siswas/{{ $siswa->kelompok_id }}">Siswa</a></span>
-                        @endcan
+                        <span class="breadcrumb-item"><a href="/dashboard/learnings">Siswa</a></span>
                         <span class="breadcrumb-item active">Detail Perkembangan ({{ $siswa->nama }} -
                             {{ $siswa->no_induk }})</span>
                     </li>

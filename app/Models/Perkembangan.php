@@ -22,6 +22,11 @@ class Perkembangan extends Model
         return $this->belongsTo(Siswa::class);
     }
 
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class);
+    }
+
     public function detailPerkembangan()
     {
         return $this->hasMany(Detailperkembangan::class);

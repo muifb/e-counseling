@@ -8,6 +8,7 @@ use Livewire\Component;
 use App\Models\Perkembangan;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pesan as ModelsComment;
+use App\Traits\NotifikasiWhatsappTrait;
 use Illuminate\Support\Facades\Redirect;
 
 class Comment extends Component
@@ -48,6 +49,21 @@ class Comment extends Component
             'perkembangan_id' => $this->perkembangan->id,
             'isi_pesan' => $this->komentar
         ]);
+
+        $notifSatu = $this->perkembangan->siswa->no_telp;
+        $notifDua = $this->perkembangan->guru->no_telp;
+        $notif = [$notifSatu, $notifDua];
+
+        foreach ($notif as $itm) {
+            $pesan = [];
+            $data['phone'] = $itm;
+            $data['message'] = 'Selamat Siang, Ada komentar baru pada informasi perkembangan. Silahkan klik link berikut dan masuk pada akun anda http://127.0.0.1:8000/ ';
+            $data['secret'] = false;
+            $data['retry'] = false;
+            $data['isGroup'] = false;
+            array_push($pesan, $data);
+            NotifikasiWhatsappTrait::sendText($pesan);
+        }
 
         if ($comment) {
             // $this->emit('comment_store', $comment->id);

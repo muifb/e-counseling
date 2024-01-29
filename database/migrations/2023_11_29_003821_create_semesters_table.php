@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDetailReport extends Migration
+class CreateSemestersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateDetailReport extends Migration
      */
     public function up()
     {
-        Schema::create('detailreport', function (Blueprint $table) {
+        Schema::create('semesters', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('report_id')->nullable();
-            $table->text('file_fotovideo')->nullable();
+            $table->string('semester');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateDetailReport extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detailreport');
+        Schema::dropIfExists('semesters');
     }
 }

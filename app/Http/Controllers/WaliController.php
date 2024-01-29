@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jadwal;
 use App\Models\Tema;
 use App\Models\User;
 use App\Models\Siswa;
+use App\Models\Jadwal;
 use App\Models\Rating;
+use App\Models\Semester;
 use App\Models\Perkembangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -31,10 +32,26 @@ class WaliController extends Controller
 
     public function showReport()
     {
+        $siswa = Siswa::find(auth()->user()->siswa->id);
+        $semester = Semester::latest()->get();
+        $tema = Tema::where('semester', $semester->first()->semester);
+        $report = $siswa->report->where('status', 'diterima')->where('semester', $semester->first()->semester);
+        $rating = Rating::with(['siswa', 'perkembangan'])->where('siswa_id', $siswa->id)->whereRelation('perkembangan', 'semester', $semester->first()->semester);
+
+        if (request('semester')) {
+            $tema = Tema::where('semester', request('semester'));
+            $report = $siswa->report->where('status', 'diterima')->where('semester', request('semester'));
+            $rating = Rating::with(['siswa', 'perkembangan'])->where('siswa_id', $siswa->id)->whereRelation('perkembangan', 'semester', request('semester'));
+        }
+
+        // return $rating->get();
+
         return view('report', [
-            'siswa' => Siswa::find(auth()->user()->siswa->id),
-            'tema' => Tema::all(),
-            'rating' => Rating::with(['siswa'])->where('siswa_id', auth()->user()->siswa->id)->get()
+            'siswa' => $siswa,
+            'tema' => $tema->get(),
+            'semester' => $semester,
+            'raport' => $report->first(),
+            'rating' => $rating->get(),
         ]);
     }
 

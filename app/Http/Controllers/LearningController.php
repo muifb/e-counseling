@@ -7,6 +7,7 @@ use App\Models\Guru;
 use App\Models\Kelompok;
 use App\Models\Rating;
 use App\Models\Report;
+use App\Models\Semester;
 use App\Models\Siswa;
 use App\Models\Tahun;
 use App\Models\Tema;
@@ -21,18 +22,35 @@ class LearningController extends Controller
 
     public function show(Siswa $siswa)
     {
-        return view('dashboard.pages.add_detail', [
+        $semester = Semester::latest()->get();
+        $tema = Tema::where('semester', $semester->first()->semester);
+        return view('dashboard.pages.add_perkembangan', [
             'data' => $siswa,
-            'tema' => Tema::all()
+            'tema' => $tema->get(),
+            'semester' => $semester
         ]);
     }
 
     public function showReport(Siswa $siswa)
     {
+        $semester = Semester::latest()->get();
+        $tema = Tema::where('semester', $semester->first()->semester);
+        $report = $siswa->report->where('status', 'diterima')->where('semester', $semester->first()->semester);
+        $rating = Rating::with(['siswa', 'perkembangan'])->where('siswa_id', $siswa->id)->whereRelation('perkembangan', 'semester', $semester->first()->semester);
+
+        if (request('semester')) {
+            $tema = Tema::where('semester', request('semester'));
+            $report = $siswa->report->where('status', 'diterima')->where('semester', request('semester'));
+            $rating = Rating::with(['siswa', 'perkembangan'])->where('siswa_id', $siswa->id)->whereRelation('perkembangan', 'semester', request('semester'));
+        }
+        // return $tema->get();
+
         return view('dashboard.rapor.report', [
             'siswa' => $siswa,
-            'tema' => Tema::all(),
-            'rating' => Rating::with(['siswa'])->where('siswa_id', $siswa->id)->get()
+            'tema' => $tema->get(),
+            'semester' => $semester,
+            'raport' => $report->first(),
+            'rating' => $rating->get()
         ]);
     }
 
@@ -50,7 +68,7 @@ class LearningController extends Controller
     {
         // return Tahun::with('kelompok')->orderBy('tahun_ajaran')->get();
         return view('dashboard.evaluasi.evaluasi_pembelajaran', [
-            'tahun' => Tahun::with('kelompok')->orderByDesc('tahun_ajaran')->get()
+            'tahun' => Tahun::with('kelompok')->orderBy('tahun_ajaran')->get()
         ]);
     }
 

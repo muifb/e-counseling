@@ -60,7 +60,7 @@
                                             <div class="row">
                                                 <div class="card-body">
                                                     <div class="row breadcrumb m-0 p-0">
-                                                        <label class="col-sm-4 col-form-label">Nomor
+                                                        <label for="no_induk" class="col-sm-4 col-form-label">Nomor
                                                             Induk</label>
                                                         <div class="col-sm">
                                                             <input class="form-control form-control-sm" type="text"
@@ -69,7 +69,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="row breadcrumb m-0 p-0">
-                                                        <label class="col-sm-4 col-form-label">Tanggal
+                                                        <label for="tgl_lahir" class="col-sm-4 col-form-label">Tanggal
                                                             Lahir</label>
                                                         <div class="col-sm">
                                                             <input class="form-control form-control-sm" type="text"
@@ -85,7 +85,8 @@
                                             <div class="row align-items-center">
                                                 <div class="card-body">
                                                     <div class="row breadcrumb m-0 p-0">
-                                                        <label class="col-sm-4 col-form-label">Kelompok</label>
+                                                        <label for="kelompok"
+                                                            class="col-sm-4 col-form-label">Kelompok</label>
                                                         <div class="col-sm">
                                                             {{-- <input type="hidden" name="kelompok_id" value=""> --}}
                                                             <input class="form-control form-control-sm" type="text"
@@ -98,7 +99,10 @@
                                                         <label for="semester"
                                                             class="col-sm-4 col-form-label">Semester</label>
                                                         <div class="col-sm">
-                                                            <select name="semester" id="semester"
+                                                            <input class="form-control form-control-sm" type="text"
+                                                                name="semester" id="semester"
+                                                                value="{{ old('semester', $report->semester) }}" readonly>
+                                                            {{-- <select name="semester" id="semester"
                                                                 class="form-select @error('semester') is-invalid @enderror">
                                                                 @if (old('semester', $report->semester))
                                                                     <option value="{{ old('semester', $report->semester) }}"
@@ -110,7 +114,7 @@
                                                                     Ganjil {{ $tahun->last()->tahun_ajaran }}</option>
                                                                 <option value="Genap {{ $tahun->last()->tahun_ajaran }}">
                                                                     Genap {{ $tahun->last()->tahun_ajaran }}</option>
-                                                            </select>
+                                                            </select> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -122,31 +126,49 @@
 
                         </div>
                         @php
-                            $fileAgama = [];
-                            $fileMotorik = [];
-                            $fileKognitif = [];
-                            $fileSosial = [];
-                            $fileBahasa = [];
-                            $fileSeni = [];
+                            $imageAgama = [];
+                            $videoAgama = [];
+                            $imageMotorik = [];
+                            $videoMotorik = [];
+                            $imageKognitif = [];
+                            $videoKognitif = [];
+                            $imageSosial = [];
+                            $videoSosial = [];
+                            $imageBahasa = [];
+                            $videoBahasa = [];
+                            $imageSeni = [];
+                            $videoSeni = [];
                             foreach ($report->detailReport as $files) {
-                                if (substr($files->file_fotovideo, 14, 9) == 'nilai-aga') {
-                                    $fileAgama[] = $files;
-                                } elseif (substr($files->file_fotovideo, 14, 9) == 'nilai-mot') {
-                                    $fileMotorik[] = $files;
-                                } elseif (substr($files->file_fotovideo, 14, 9) == 'nilai-kog') {
-                                    $fileKognitif[] = $files;
-                                } elseif (substr($files->file_fotovideo, 14, 9) == 'nilai-sos') {
-                                    $fileSosial[] = $files;
-                                } elseif (substr($files->file_fotovideo, 14, 9) == 'nilai-bah') {
-                                    $fileBahasa[] = $files;
-                                } elseif (substr($files->file_fotovideo, 14, 9) == 'nilai-sen') {
-                                    $fileSeni[] = $files;
+                                if (substr($files->file_fotovideo, 14, 15) == 'video/nilai-aga') {
+                                    $videoAgama[] = $files->file_fotovideo;
+                                } elseif (substr($files->file_fotovideo, 14, 15) == 'image/nilai-aga') {
+                                    $imageAgama[] = $files->file_fotovideo;
+                                } elseif (substr($files->file_fotovideo, 14, 15) == 'video/nilai-mot') {
+                                    $videoMotorik[] = $files->file_fotovideo;
+                                } elseif (substr($files->file_fotovideo, 14, 15) == 'image/nilai-mot') {
+                                    $imageMotorik[] = $files->file_fotovideo;
+                                } elseif (substr($files->file_fotovideo, 14, 15) == 'video/nilai-kog') {
+                                    $videoKognitif[] = $files->file_fotovideo;
+                                } elseif (substr($files->file_fotovideo, 14, 15) == 'image/nilai-kog') {
+                                    $imageKognitif[] = $files->file_fotovideo;
+                                } elseif (substr($files->file_fotovideo, 14, 15) == 'video/nilai-sos') {
+                                    $videoSosial[] = $files->file_fotovideo;
+                                } elseif (substr($files->file_fotovideo, 14, 15) == 'image/nilai-sos') {
+                                    $imageSosial[] = $files->file_fotovideo;
+                                } elseif (substr($files->file_fotovideo, 14, 15) == 'video/nilai-bah') {
+                                    $videoBahasa[] = $files->file_fotovideo;
+                                } elseif (substr($files->file_fotovideo, 14, 15) == 'image/nilai-bah') {
+                                    $imageBahasa[] = $files->file_fotovideo;
+                                } elseif (substr($files->file_fotovideo, 14, 15) == 'video/nilai-sen') {
+                                    $videoSeni[] = $files->file_fotovideo;
+                                } else {
+                                    $imageSeni[] = $files->file_fotovideo;
                                 }
                             }
                         @endphp
                         <div class="mb-2">
                             <div class="row mb-1">
-                                <label class="col-sm-3 col-form-label">
+                                <label for="nilai_agama" class="col-sm-3 col-form-label">
                                     <span>Perkembangan Nilai</span><br>
                                     <span>Agama dan Moral</span>
                                 </label>
@@ -167,55 +189,59 @@
                         </div>
                         <div class="mb-2">
                             <div class="row mb-1">
-                                <label class="col-sm-3 col-form-label">Tambahkan Foto/Video</label>
+                                <label for="photoAgama*" class="col-sm-3 col-form-label">Tambahkan Foto/Video</label>
                                 <div class="col-sm-9">
                                     <div class="row ps-3 rounded" id="imagePreview">
-                                        @foreach ($fileAgama as $key => $agama)
-                                            <div class="ms-1 mb-1 col-md-3 border rounded p-2 avatar-upload">
-                                                @if ($agama->tipe_file == 'video')
-                                                    {{-- <div class="avatar-edit">
-                                                        <input type='file' id="imageAgamaEdit{{ $key + 1 }}"
-                                                            onchange="fileAgamaEdit({{ $key + 1 }})"
-                                                            name="file_agama_edit[]" />
-                                                        <label for="imageAgamaEdit{{ $key + 1 }}"></label>
-                                                    </div> --}}
-                                                    <div class="ratio ratio-16x9 image-agama-edit{{ $key + 1 }}">
-                                                        <video class="img-fluid" controls>
-                                                            <source src="{{ asset('storage/' . $agama->file_fotovideo) }}"
-                                                                type="video/mp4" />
-                                                        </video>
+                                        @if (count($videoAgama) || count($imageAgama))
+                                            @if (count($videoAgama))
+                                                @foreach ($videoAgama as $files)
+                                                    <div class="ms-1 mb-1 col-md-3 border rounded p-2">
+                                                        <div class="ratio ratio-16x9">
+                                                            <video class="img-fluid" controls>
+                                                                <source src="{{ asset('storage/' . $files) }}"
+                                                                    type="video/mp4" />
+                                                            </video>
+                                                        </div>
                                                     </div>
-                                                @endif
-                                                @if ($agama->tipe_file == 'image')
-                                                    {{-- <div class="avatar-edit">
-                                                        <input type='file' id="imageAgamaEdit{{ $key + 1 }}"
-                                                            onchange="fileAgamaEdit({{ $key + 1 }})"
-                                                            name="file_agama_edit[]" />
-                                                        <label for="imageAgamaEdit{{ $key + 1 }}"></label>
-                                                    </div> --}}
-                                                    <div class="portfolio-img image-agama-edit{{ $key + 1 }}">
-                                                        <img src="{{ asset('storage/' . $agama->file_fotovideo) }}"
-                                                            alt="Profile" class="img-fluid">
+                                                @endforeach
+                                            @endif
+                                            @if (count($imageAgama))
+                                                @foreach ($imageAgama as $file)
+                                                    <div class="ms-1 mb-1 col-md-3 border rounded p-2">
+                                                        <div class="portfolio-img">
+                                                            <img src="{{ asset('storage/' . $file) }}" alt="Profile"
+                                                                class="img-fluid">
+                                                        </div>
                                                     </div>
-                                                @endif
-                                            </div>
-                                        @endforeach
-                                        @php
-                                            $jumlahFiles = 4;
-                                            $jmlData = count($fileAgama);
-                                            $jmlInput = $jumlahFiles - $jmlData;
-                                        @endphp
-                                        @for ($i = 1; $i <= $jmlInput; $i++)
-                                            <label class="btn col-sm-1 mb-1 photo-agama{{ $i }}"
-                                                for="photoAgama{{ $i }}">
-                                                <i
-                                                    class="bi bi-plus-square fs-1 img-preview-agama{{ $i }}"></i>
+                                                @endforeach
+                                            @endif
+                                        @endif
+                                        @if (!count($videoAgama) || !count($imageAgama))
+                                            <label class="btn col-sm-1 mb-1 photo-agama1" for="photoAgama1">
+                                                <i class="bi bi-plus-square fs-1 img-preview-agama1"></i>
                                             </label>
-                                            <input class="form-control" type="file"
-                                                id="photoAgama{{ $i }}" style="display: none;"
-                                                name="photo_agama[]" multiple
-                                                onchange="previewImageAgama({{ $i }})">
-                                        @endfor
+                                            <input class="form-control" type="file" id="photoAgama1"
+                                                style="display: none;" name="photo_agama[]" multiple
+                                                onchange="previewImageAgama1()">
+                                            <label class="btn col-sm-1 mb-1 photo-agama2" for="photoAgama2">
+                                                <i class="bi bi-plus-square fs-1 img-preview-agama2"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoAgama2"
+                                                style="display: none;" name="photo_agama[]" multiple
+                                                onchange="previewImageAgama2()">
+                                            <label class="btn col-sm-1 mb-1 photo-agama3" for="photoAgama3">
+                                                <i class="bi bi-plus-square fs-1 img-preview-agama3"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoAgama3"
+                                                style="display: none;" name="photo_agama[]" multiple
+                                                onchange="previewImageAgama3()">
+                                            <label class="btn col-sm-1 mb-1 photo-agama4" for="photoAgama4">
+                                                <i class="bi bi-plus-square fs-1 img-preview-agama4"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoAgama4"
+                                                style="display: none;" name="photo_agama[]" multiple
+                                                onchange="previewImageAgama4()">
+                                        @endif
                                     </div>
 
                                     @error('photo_agama*')
@@ -236,7 +262,7 @@
                         </div>
                         <div class="mb-2">
                             <div class="row mb-1">
-                                <label class="col-sm-3 col-form-label">
+                                <label for="motorik" class="col-sm-3 col-form-label">
                                     <span>Perkembangan Fisik</span><br>
                                     <span>dan Motorik</span>
                                 </label>
@@ -256,58 +282,60 @@
                         </div>
                         <div class="mb-2">
                             <div class="row mb-1">
-                                <label class="col-sm-3 col-form-label">Tambahkan
+                                <label for="photoMotorik*" class="col-sm-3 col-form-label">Tambahkan
                                     Foto/Video</label>
                                 <div class="col-sm-9">
                                     <div class="row ps-3 rounded" id="imagePreview">
-                                        @foreach ($fileMotorik as $key => $motorik)
-                                            <div class="ms-1 mb-1 col-md-3 border rounded p-2 avatar-upload">
-                                                @if ($motorik->tipe_file == 'video')
-                                                    {{-- <div class="avatar-edit">
-                                                        <input type='file' id="imageMotorikEdit{{ $key + 1 }}"
-                                                            onchange="fileMotorikEdit({{ $key + 1 }})"
-                                                            name="file_motorik_edit[]" />
-                                                        <label for="imageMotorikEdit{{ $key + 1 }}"></label>
-                                                    </div> --}}
-                                                    <div class="ratio ratio-16x9 image-motorik-edit{{ $key + 1 }}">
-                                                        <video class="img-fluid preview-edit{{ $key + 1 }}" controls>
-                                                            <source
-                                                                src="{{ asset('storage/' . $motorik->file_fotovideo) }}"
-                                                                type="video/mp4" />
-                                                        </video>
+                                        @if (count($videoMotorik) || count($imageMotorik))
+                                            @if (count($videoMotorik))
+                                                @foreach ($videoMotorik as $files)
+                                                    <div class="ms-1 mb-1 col-md-3 border rounded p-2">
+                                                        <div class="ratio ratio-16x9">
+                                                            <video class="img-fluid" controls>
+                                                                <source src="{{ asset('storage/' . $files) }}"
+                                                                    type="video/mp4" />
+                                                            </video>
+                                                        </div>
                                                     </div>
-                                                @endif
-                                                @if ($motorik->tipe_file == 'image')
-                                                    {{-- <div class="avatar-edit">
-                                                        <input type='file' id="imageMotorikEdit{{ $key + 1 }}"
-                                                            onchange="fileMotorikEdit({{ $key + 1 }})"
-                                                            name="file_motorik_edit[]" />
-                                                        <label for="imageMotorikEdit{{ $key + 1 }}"></label>
-                                                    </div> --}}
-                                                    <div class="portfolio-img image-motorik-edit{{ $key + 1 }}">
-                                                        <img src="{{ asset('storage/' . $motorik->file_fotovideo) }}"
-                                                            alt="Profile"
-                                                            class="img-fluid preview-edit{{ $key + 1 }}">
+                                                @endforeach
+                                            @endif
+                                            @if (count($imageMotorik))
+                                                @foreach ($imageMotorik as $files)
+                                                    <div class="ms-1 mb-1 col-md-3 border rounded p-2">
+                                                        <div class="portfolio-img">
+                                                            <img src="{{ asset('storage/' . $files) }}" alt="Profile"
+                                                                class="img-fluid">
+                                                        </div>
                                                     </div>
-                                                @endif
-                                            </div>
-                                        @endforeach
-                                        @php
-                                            $jumlahFlMotorik = 4;
-                                            $jmlDtMotorik = count($fileMotorik);
-                                            $jmlInpMotorik = $jumlahFlMotorik - $jmlDtMotorik;
-                                        @endphp
-                                        @for ($iMotorik = 1; $iMotorik <= $jmlInpMotorik; $iMotorik++)
-                                            <label class="btn col-sm-1 mb-1 photo-motorik{{ $iMotorik }}"
-                                                for="photoMotorik{{ $iMotorik }}">
-                                                <i
-                                                    class="bi bi-plus-square fs-1 img-preview-motorik{{ $iMotorik }}"></i>
+                                                @endforeach
+                                            @endif
+                                        @endif
+                                        @if (!count($videoMotorik) || !count($imageMotorik))
+                                            <label class="btn col-sm-1 mb-1 photo-motorik1" for="photoMotorik1">
+                                                <i class="bi bi-plus-square fs-1 img-preview-motorik1"></i>
                                             </label>
-                                            <input class="form-control" type="file"
-                                                id="photoMotorik{{ $iMotorik }}" style="display: none;"
-                                                name="photo_motorik[]" multiple
-                                                onchange="previewImageMotorik({{ $iMotorik }})">
-                                        @endfor
+                                            <input class="form-control" type="file" id="photoMotorik1"
+                                                style="display: none;" name="photo_motorik[]" multiple
+                                                onchange="previewImageMotorik1()">
+                                            <label class="btn col-sm-1 mb-1 photo-motorik2" for="photoMotorik2">
+                                                <i class="bi bi-plus-square fs-1 img-preview-motorik2"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoMotorik2"
+                                                style="display: none;" name="photo_motorik[]" multiple
+                                                onchange="previewImageMotorik2()">
+                                            <label class="btn col-sm-1 mb-1 photo-motorik3" for="photoMotorik3">
+                                                <i class="bi bi-plus-square fs-1 img-preview-motorik3"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoMotorik3"
+                                                style="display: none;" name="photo_motorik[]" multiple
+                                                onchange="previewImageMotorik3()">
+                                            <label class="btn col-sm-1 mb-1 photo-motorik4" for="photoMotorik4">
+                                                <i class="bi bi-plus-square fs-1 img-preview-motorik4"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoMotorik4"
+                                                style="display: none;" name="photo_motorik[]" multiple
+                                                onchange="previewImageMotorik4()">
+                                        @endif
                                     </div>
                                     @error('photo_motorik*')
                                         <p class="text-danger">
@@ -326,7 +354,7 @@
                         </div>
                         <div class="mb-2">
                             <div class="row mb-1">
-                                <label class="col-sm-3 col-form-label">
+                                <label for="kognitif" class="col-sm-3 col-form-label">
                                     <span>Perkembangan Kognitif</span>
                                 </label>
                                 <div class="col-sm-9">
@@ -345,57 +373,60 @@
                         </div>
                         <div class="mb-2">
                             <div class="row mb-1">
-                                <label class="col-sm-3 col-form-label">Tambahkan
+                                <label for="photoKognitif*" class="col-sm-3 col-form-label">Tambahkan
                                     Foto/Video</label>
                                 <div class="col-sm-9">
                                     <div class="row ps-3 rounded" id="imagePreview">
-                                        @foreach ($fileKognitif as $key => $kognitif)
-                                            <div class="ms-1 mb-1 col-md-3 border rounded p-2 avatar-upload">
-                                                @if ($kognitif->tipe_file == 'video')
-                                                    {{-- <div class="avatar-edit">
-                                                        <input type='file' id="imageKognitifEdit{{ $key + 1 }}"
-                                                            onchange="fileKognitifEdit({{ $key + 1 }})"
-                                                            name="file_kognitif_edit[]" />
-                                                        <label for="imageKognitifEdit{{ $key + 1 }}"></label>
-                                                    </div> --}}
-                                                    <div class="ratio ratio-16x9 image-kognitif-edit{{ $key + 1 }}">
-                                                        <video class="img-fluid" controls>
-                                                            <source
-                                                                src="{{ asset('storage/' . $kognitif->file_fotovideo) }}"
-                                                                type="video/mp4" />
-                                                        </video>
+                                        @if (count($videoKognitif) || count($imageKognitif))
+                                            @if (count($videoKognitif))
+                                                @foreach ($videoKognitif as $files)
+                                                    <div class="ms-1 mb-1 col-md-3 border rounded p-2">
+                                                        <div class="ratio ratio-16x9">
+                                                            <video class="img-fluid" controls>
+                                                                <source src="{{ asset('storage/' . $files) }}"
+                                                                    type="video/mp4" />
+                                                            </video>
+                                                        </div>
                                                     </div>
-                                                @endif
-                                                @if ($kognitif->tipe_file == 'image')
-                                                    {{-- <div class="avatar-edit">
-                                                        <input type='file' id="imageKognitifEdit{{ $key + 1 }}"
-                                                            onchange="fileKognitifEdit({{ $key + 1 }})"
-                                                            name="file_kognitif_edit[]" />
-                                                        <label for="imageKognitifEdit{{ $key + 1 }}"></label>
-                                                    </div> --}}
-                                                    <div class="portfolio-img image-kognitif-edit{{ $key + 1 }}">
-                                                        <img src="{{ asset('storage/' . $kognitif->file_fotovideo) }}"
-                                                            alt="Profile" class="img-fluid">
+                                                @endforeach
+                                            @endif
+                                            @if (count($imageKognitif))
+                                                @foreach ($imageKognitif as $item)
+                                                    <div class="ms-1 mb-1 col-md-3 border rounded p-2">
+                                                        <div class="portfolio-img">
+                                                            <img src="{{ asset('storage/' . $item) }}" alt="Profile"
+                                                                class="img-fluid">
+                                                        </div>
                                                     </div>
-                                                @endif
-                                            </div>
-                                        @endforeach
-                                        @php
-                                            $jumlahFlKognitif = 4;
-                                            $jmlDtKognitif = count($fileKognitif);
-                                            $jmlInpKognitif = $jumlahFlKognitif - $jmlDtKognitif;
-                                        @endphp
-                                        @for ($iKognitif = 1; $iKognitif <= $jmlInpKognitif; $iKognitif++)
-                                            <label class="btn col-sm-1 mb-1 photo-kognitif{{ $iKognitif }}"
-                                                for="photoKognitif{{ $iKognitif }}">
-                                                <i
-                                                    class="bi bi-plus-square fs-1 img-preview-kognitif{{ $iKognitif }}"></i>
+                                                @endforeach
+                                            @endif
+                                        @endif
+                                        @if (!count($videoKognitif) || !count($imageKognitif))
+                                            <label class="btn col-sm-1 mb-1 photo-kognitif1" for="photoKognitif1">
+                                                <i class="bi bi-plus-square fs-1 img-preview-kognitif1"></i>
                                             </label>
-                                            <input class="form-control" type="file"
-                                                id="photoKognitif{{ $iKognitif }}" style="display: none;"
-                                                name="photo_kognitif[]" multiple
-                                                onchange="previewImageKognitif({{ $iKognitif }})">
-                                        @endfor
+                                            <input class="form-control" type="file" id="photoKognitif1"
+                                                style="display: none;" name="photo_kognitif[]" multiple
+                                                onchange="previewImageKognitif1()">
+                                            <label class="btn col-sm-1 mb-1 photo-kognitif2" for="photoKognitif2">
+                                                <i class="bi bi-plus-square fs-1 img-preview-kognitif2"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoKognitif2"
+                                                style="display: none;" name="photo_kognitif[]" multiple
+                                                onchange="previewImageKognitif2()">
+                                            <label class="btn col-sm-1 mb-1 photo-kognitif3" for="photoKognitif3">
+                                                <i class="bi bi-plus-square fs-1 img-preview-kognitif3"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoKognitif3"
+                                                style="display: none;" name="photo_kognitif[]" multiple
+                                                onchange="previewImageKognitif3()">
+                                            <label class="btn col-sm-1 mb-1 photo-kognitif4" for="photoKognitif4">
+                                                <i class="bi bi-plus-square fs-1 img-preview-kognitif4"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoKognitif4"
+                                                style="display: none;" name="photo_kognitif[]" multiple
+                                                onchange="previewImageKognitif4()">
+                                        @endif
                                     </div>
                                     @error('photo_kognitif*')
                                         <p class="text-danger">
@@ -414,7 +445,7 @@
                         </div>
                         <div class="mb-2">
                             <div class="row mb-1">
-                                <label class="col-sm-3 col-form-label">
+                                <label for="sosial" class="col-sm-3 col-form-label">
                                     <span>Perkembangan Sosial Emosional</span>
                                 </label>
                                 <div class="col-sm-9">
@@ -433,56 +464,59 @@
                         </div>
                         <div class="mb-2">
                             <div class="row mb-1">
-                                <label class="col-sm-3 col-form-label">Tambahkan Foto/Video</label>
+                                <label for="photoSosial*" class="col-sm-3 col-form-label">Tambahkan Foto/Video</label>
                                 <div class="col-sm-9">
                                     <div class="row ps-3 rounded" id="imagePreview">
-                                        @foreach ($fileSosial as $key => $sosial)
-                                            <div class="ms-1 mb-1 col-md-3 border rounded p-2 avatar-upload">
-                                                @if ($sosial->tipe_file == 'video')
-                                                    {{-- <div class="avatar-edit">
-                                                        <input type='file' id="imageSosialEdit{{ $key + 1 }}"
-                                                            onchange="fileSosialEdit({{ $key + 1 }})"
-                                                            name="file_sosial_edit[]" />
-                                                        <label for="imageSosialEdit{{ $key + 1 }}"></label>
-                                                    </div> --}}
-                                                    <div class="ratio ratio-16x9 image-sosial-edit{{ $key + 1 }}">
-                                                        <video class="img-fluid" controls>
-                                                            <source
-                                                                src="{{ asset('storage/' . $sosial->file_fotovideo) }}"
-                                                                type="video/mp4" />
-                                                        </video>
+                                        @if (count($videoSosial) || count($imageSosial))
+                                            @if (count($videoSosial))
+                                                @foreach ($videoSosial as $files)
+                                                    <div class="ms-1 mb-1 col-md-3 border rounded p-2">
+                                                        <div class="ratio ratio-16x9">
+                                                            <video class="img-fluid" controls>
+                                                                <source src="{{ asset('storage/' . $files) }}"
+                                                                    type="video/mp4" />
+                                                            </video>
+                                                        </div>
                                                     </div>
-                                                @endif
-                                                @if ($sosial->tipe_file == 'image')
-                                                    {{-- <div class="avatar-edit">
-                                                        <input type='file' id="imageSosialEdit{{ $key + 1 }}"
-                                                            onchange="fileSosialEdit({{ $key + 1 }})"
-                                                            name="file_sosial_edit[]" />
-                                                        <label for="imageSosialEdit{{ $key + 1 }}"></label>
-                                                    </div> --}}
-                                                    <div class="portfolio-img image-sosial-edit{{ $key + 1 }}">
-                                                        <img src="{{ asset('storage/' . $sosial->file_fotovideo) }}"
-                                                            alt="Profile" class="img-fluid">
+                                                @endforeach
+                                            @endif
+                                            @if (count($imageSosial))
+                                                @foreach ($imageSosial as $item)
+                                                    <div class="ms-1 mb-1 col-md-3 border rounded p-2">
+                                                        <div class="portfolio-img">
+                                                            <img src="{{ asset('storage/' . $item) }}" alt="Profile"
+                                                                class="img-fluid">
+                                                        </div>
                                                     </div>
-                                                @endif
-                                            </div>
-                                        @endforeach
-                                        @php
-                                            $jumlahFlSosial = 4;
-                                            $jmlDtSosial = count($fileSosial);
-                                            $jmlInpSosial = $jumlahFlSosial - $jmlDtSosial;
-                                        @endphp
-                                        @for ($iSosial = 1; $iSosial <= $jmlInpSosial; $iSosial++)
-                                            <label class="btn col-sm-1 mb-1 photo-sosial{{ $iSosial }}"
-                                                for="photoSosial{{ $iSosial }}">
-                                                <i
-                                                    class="bi bi-plus-square fs-1 img-preview-sosial{{ $iSosial }}"></i>
+                                                @endforeach
+                                            @endif
+                                        @endif
+                                        @if (!count($videoSosial) || !count($imageSosial))
+                                            <label class="btn col-sm-1 mb-1 photo-sosial1" for="photoSosial1">
+                                                <i class="bi bi-plus-square fs-1 img-preview-sosial1"></i>
                                             </label>
-                                            <input class="form-control" type="file"
-                                                id="photoSosial{{ $iSosial }}" style="display: none;"
-                                                name="photo_sosial[]" multiple
-                                                onchange="previewImageSosial({{ $iSosial }})">
-                                        @endfor
+                                            <input class="form-control" type="file" id="photoSosial1"
+                                                style="display: none;" name="photo_sosial[]" multiple
+                                                onchange="previewImageSosial1()">
+                                            <label class="btn col-sm-1 mb-1 photo-sosial2" for="photoSosial2">
+                                                <i class="bi bi-plus-square fs-1 img-preview-sosial2"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoSosial2"
+                                                style="display: none;" name="photo_sosial[]" multiple
+                                                onchange="previewImageSosial2()">
+                                            <label class="btn col-sm-1 mb-1 photo-sosial3" for="photoSosial3">
+                                                <i class="bi bi-plus-square fs-1 img-preview-sosial3"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoSosial3"
+                                                style="display: none;" name="photo_sosial[]" multiple
+                                                onchange="previewImageSosial3()">
+                                            <label class="btn col-sm-1 mb-1 photo-sosial4" for="photoSosial4">
+                                                <i class="bi bi-plus-square fs-1 img-preview-sosial4"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoSosial4"
+                                                style="display: none;" name="photo_sosial[]" multiple
+                                                onchange="previewImageSosial4()">
+                                        @endif
                                     </div>
                                     @error('photo_sosial*')
                                         <p class="text-danger">
@@ -501,7 +535,7 @@
                         </div>
                         <div class="mb-2">
                             <div class="row mb-1">
-                                <label class="col-sm-3 col-form-label">
+                                <label for="bahasa" class="col-sm-3 col-form-label">
                                     <span>Perkembangan Bahasa</span>
                                 </label>
                                 <div class="col-sm-9">
@@ -520,56 +554,59 @@
                         </div>
                         <div class="mb-2">
                             <div class="row mb-1">
-                                <label class="col-sm-3 col-form-label">Tambahkan Foto/Video</label>
+                                <label for="photoBahasa*" class="col-sm-3 col-form-label">Tambahkan Foto/Video</label>
                                 <div class="col-sm-9">
                                     <div class="row ps-3 rounded" id="imagePreview">
-                                        @foreach ($fileBahasa as $key => $bahasa)
-                                            <div class="ms-1 mb-1 col-md-3 border rounded p-2 avatar-upload">
-                                                @if ($bahasa->tipe_file == 'video')
-                                                    {{-- <div class="avatar-edit">
-                                                        <input type='file' id="imageBahasaEdit{{ $key + 1 }}"
-                                                            onchange="fileBahasaEdit({{ $key + 1 }})"
-                                                            name="file_bahasa_edit[]" />
-                                                        <label for="imageBahasaEdit{{ $key + 1 }}"></label>
-                                                    </div> --}}
-                                                    <div class="ratio ratio-16x9 image-bahasa-edit{{ $key + 1 }}">
-                                                        <video class="img-fluid" controls>
-                                                            <source
-                                                                src="{{ asset('storage/' . $bahasa->file_fotovideo) }}"
-                                                                type="video/mp4" />
-                                                        </video>
+                                        @if (count($videoBahasa) || count($imageBahasa))
+                                            @if (count($videoBahasa))
+                                                @foreach ($videoBahasa as $files)
+                                                    <div class="ms-1 mb-1 col-md-3 border rounded p-2">
+                                                        <div class="ratio ratio-16x9">
+                                                            <video class="img-fluid" controls>
+                                                                <source src="{{ asset('storage/' . $files) }}"
+                                                                    type="video/mp4" />
+                                                            </video>
+                                                        </div>
                                                     </div>
-                                                @endif
-                                                @if ($bahasa->tipe_file == 'image')
-                                                    {{-- <div class="avatar-edit">
-                                                        <input type='file' id="imageBahasaEdit{{ $key + 1 }}"
-                                                            onchange="fileBahasaEdit({{ $key + 1 }})"
-                                                            name="file_bahasa_edit[]" />
-                                                        <label for="imageBahasaEdit{{ $key + 1 }}"></label>
-                                                    </div> --}}
-                                                    <div class="portfolio-img image-bahasa-edit{{ $key + 1 }}">
-                                                        <img src="{{ asset('storage/' . $bahasa->file_fotovideo) }}"
-                                                            alt="" class="img-fluid">
+                                                @endforeach
+                                            @endif
+                                            @if (count($imageBahasa))
+                                                @foreach ($imageBahasa as $item)
+                                                    <div class="ms-1 mb-1 col-md-3 border rounded p-2 portfolio-item">
+                                                        <div class="portfolio-img">
+                                                            <img src="{{ asset('storage/' . $item) }}" alt="Profile"
+                                                                class="img-fluid">
+                                                        </div>
                                                     </div>
-                                                @endif
-                                            </div>
-                                        @endforeach
-                                        @php
-                                            $jumlahFlBahasa = 4;
-                                            $jmlDtBahasa = count($fileBahasa);
-                                            $jmlInpBahasa = $jumlahFlBahasa - $jmlDtBahasa;
-                                        @endphp
-                                        @for ($iBahasa = 1; $iBahasa <= $jmlInpBahasa; $iBahasa++)
-                                            <label class="btn col-sm-1 mb-1 photo-bahasa{{ $iBahasa }}"
-                                                for="photoBahasa{{ $iBahasa }}">
-                                                <i
-                                                    class="bi bi-plus-square fs-1 img-preview-bahasa{{ $iBahasa }}"></i>
+                                                @endforeach
+                                            @endif
+                                        @endif
+                                        @if (!count($videoBahasa) || !count($imageBahasa))
+                                            <label class="btn col-sm-1 mb-1 photo-bahasa1" for="photoBahasa1">
+                                                <i class="bi bi-plus-square fs-1 img-preview-bahasa1"></i>
                                             </label>
-                                            <input class="form-control" type="file"
-                                                id="photoBahasa{{ $iBahasa }}" style="display: none;"
-                                                name="photo_bahasa[]" multiple
-                                                onchange="previewImageBahasa({{ $iBahasa }})">
-                                        @endfor
+                                            <input class="form-control" type="file" id="photoBahasa1"
+                                                style="display: none;" name="photo_bahasa[]" multiple
+                                                onchange="previewImageBahasa1()">
+                                            <label class="btn col-sm-1 mb-1 photo-bahasa2" for="photoBahasa2">
+                                                <i class="bi bi-plus-square fs-1 img-preview-bahasa2"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoBahasa2"
+                                                style="display: none;" name="photo_bahasa[]" multiple
+                                                onchange="previewImageBahasa2()">
+                                            <label class="btn col-sm-1 mb-1 photo-bahasa3" for="photoBahasa3">
+                                                <i class="bi bi-plus-square fs-1 img-preview-bahasa3"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoBahasa3"
+                                                style="display: none;" name="photo_bahasa[]" multiple
+                                                onchange="previewImageBahasa3()">
+                                            <label class="btn col-sm-1 mb-1 photo-bahasa4" for="photoBahasa4">
+                                                <i class="bi bi-plus-square fs-1 img-preview-bahasa4"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoBahasa4"
+                                                style="display: none;" name="photo_bahasa[]" multiple
+                                                onchange="previewImageBahasa4()">
+                                        @endif
                                     </div>
                                     @error('photo_bahasa*')
                                         <p class="text-danger">
@@ -588,7 +625,7 @@
                         </div>
                         <div class="mb-2">
                             <div class="row mb-1">
-                                <label class="col-sm-3 col-form-label">
+                                <label for="seni" class="col-sm-3 col-form-label">
                                     <span>Perkembangan Seni</span>
                                 </label>
                                 <div class="col-sm-9">
@@ -607,53 +644,59 @@
                         </div>
                         <div class="mb-2">
                             <div class="row mb-1">
-                                <label class="col-sm-3 col-form-label">Tambahkan Foto/Video</label>
+                                <label for="photoSeni*" class="col-sm-3 col-form-label">Tambahkan Foto/Video</label>
                                 <div class="col-sm-9">
                                     <div class="row ps-3 rounded" id="imagePreview">
-                                        @foreach ($fileSeni as $key => $seni)
-                                            <div class="ms-1 mb-1 col-md-3 border rounded p-2 avatar-upload">
-                                                @if ($seni->tipe_file == 'video')
-                                                    {{-- <div class="avatar-edit">
-                                                        <input type='file' id="imageSeniEdit{{ $key + 1 }}"
-                                                            onchange="fileSeniEdit({{ $key + 1 }})"
-                                                            name="file_seni_edit[]" />
-                                                        <label for="imageSeniEdit{{ $key + 1 }}"></label>
-                                                    </div> --}}
-                                                    <div class="ratio ratio-16x9 image-seni-edit{{ $key + 1 }}">
-                                                        <video class="img-fluid" controls>
-                                                            <source src="{{ asset('storage/' . $seni->file_fotovideo) }}"
-                                                                type="video/mp4" />
-                                                        </video>
+                                        @if (count($videoSeni) || count($imageSeni))
+                                            @if (count($videoSeni))
+                                                @foreach ($videoSeni as $files)
+                                                    <div class="ms-1 mb-1 col-md-3 border rounded p-2">
+                                                        <div class="ratio ratio-16x9">
+                                                            <video class="img-fluid" controls>
+                                                                <source src="{{ asset('storage/' . $files) }}"
+                                                                    type="video/mp4" />
+                                                            </video>
+                                                        </div>
                                                     </div>
-                                                @endif
-                                                @if ($seni->tipe_file == 'image')
-                                                    {{-- <div class="avatar-edit">
-                                                        <input type='file' id="imageSeniEdit{{ $key + 1 }}"
-                                                            onchange="fileSeniEdit({{ $key + 1 }})"
-                                                            name="file_seni_edit[]" />
-                                                        <label for="imageSeniEdit{{ $key + 1 }}"></label>
-                                                    </div> --}}
-                                                    <div class="portfolio-img image-seni-edit{{ $key + 1 }}">
-                                                        <img src="{{ asset('storage/' . $seni->file_fotovideo) }}"
-                                                            alt="Profile" class="img-fluid">
+                                                @endforeach
+                                            @endif
+                                            @if (count($imageSeni))
+                                                @foreach ($imageSeni as $item)
+                                                    <div class="ms-1 mb-1 col-md-3 border rounded p-2  portfolio-item">
+                                                        <div class="portfolio-img">
+                                                            <img src="{{ asset('storage/' . $item) }}" alt="Profile"
+                                                                class="img-fluid">
+                                                        </div>
                                                     </div>
-                                                @endif
-                                            </div>
-                                        @endforeach
-                                        @php
-                                            $jumlahFlSeni = 4;
-                                            $jmlDtSeni = count($fileSeni);
-                                            $jmlInpSeni = $jumlahFlSeni - $jmlDtSeni;
-                                        @endphp
-                                        @for ($iSeni = 1; $iSeni <= $jmlInpSeni; $iSeni++)
-                                            <label class="btn col-sm-1 mb-1 photo-seni{{ $iSeni }}"
-                                                for="photoSeni{{ $iSeni }}">
-                                                <i class="bi bi-plus-square fs-1 img-preview-seni{{ $iSeni }}"></i>
+                                                @endforeach
+                                            @endif
+                                        @endif
+                                        @if (!count($videoSeni) || !count($imageSeni))
+                                            <label class="btn col-sm-1 mb-1 photo-seni1" for="photoSeni1">
+                                                <i class="bi bi-plus-square fs-1 img-preview-seni1"></i>
                                             </label>
-                                            <input class="form-control" type="file" id="photoSeni{{ $iSeni }}"
+                                            <input class="form-control" type="file" id="photoSeni1"
                                                 style="display: none;" name="photo_seni[]" multiple
-                                                onchange="previewImageSeni({{ $iSeni }})">
-                                        @endfor
+                                                onchange="previewImageSeni1()">
+                                            <label class="btn col-sm-1 mb-1 photo-seni2" for="photoSeni2">
+                                                <i class="bi bi-plus-square fs-1 img-preview-seni2"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoSeni2"
+                                                style="display: none;" name="photo_seni[]" multiple
+                                                onchange="previewImageSeni2()">
+                                            <label class="btn col-sm-1 mb-1 photo-seni3" for="photoSeni3">
+                                                <i class="bi bi-plus-square fs-1 img-preview-seni3"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoSeni3"
+                                                style="display: none;" name="photo_seni[]" multiple
+                                                onchange="previewImageSeni3()">
+                                            <label class="btn col-sm-1 mb-1 photo-seni4" for="photoSeni4">
+                                                <i class="bi bi-plus-square fs-1 img-preview-seni4"></i>
+                                            </label>
+                                            <input class="form-control" type="file" id="photoSeni4"
+                                                style="display: none;" name="photo_seni[]" multiple
+                                                onchange="previewImageSeni4()">
+                                        @endif
                                     </div>
                                     @error('photo_seni*')
                                         <p class="text-danger">
@@ -671,7 +714,7 @@
                             </div>
                         </div>
                         <div class="row my-3">
-                            <label class="col-sm-3 col-form-label">&nbsp;</label>
+                            <label for="" class="col-sm-3 col-form-label"></label>
                             <div class="col-sm-9">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="ri-checkbox-circle-fill"></i> Ubah

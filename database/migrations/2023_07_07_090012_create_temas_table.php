@@ -15,11 +15,11 @@ class CreateTemasTable extends Migration
     {
         Schema::create('tema', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tahun_id')->nullable();
+            // $table->foreignId('tahun_id')->nullable();
             $table->string('nama_tema');
             $table->text('sentra')->nullable();
+            // $table->integer('pertemuan')->nullable();
             $table->string('semester')->nullable();
-            // $table->string('tahun_akademik')->nullable();
             $table->timestamps();
         });
     }

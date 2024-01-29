@@ -35,7 +35,7 @@
                         </div>
                     @endif
                     <span class="d-none d-md-block dropdown-toggle ps-2">
-                        {{ ucwords(strtolower(auth()->user()->nama)) }}
+                        {{ auth()->user()->nama }}
                     </span>
                 </a><!-- End Profile Iamge Icon -->
 

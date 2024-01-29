@@ -39,8 +39,9 @@ $(function () {
             success: function (data) {
                 $("#id").val(data.id);
                 $("#inputTemaEdit").val(data.nama_tema);
+                $("#inputPertemuanEdit").val(data.pertemuan);
                 $("#inputSemesterEdit").val(data.semester);
-                $("#inputTahunEdit").val(data.tahun_id);
+                // $("#inputTahunEdit").val(data.tahun_id);
                 $("#inputSentraEdit").val(data.sentra);
             },
         });

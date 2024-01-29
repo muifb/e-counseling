@@ -36,7 +36,7 @@
                                             </a>
                                             <a class="btn btn-warning btn-sm"
                                                 href="/administrator/teachers/{{ $d->id }}/edit">Ubah
-                                                <i class="ri-edit-2-line"></i>
+                                                <i class="ri-edit-line"></i>
                                             </a>
                                             <form action="/administrator/teachers/{{ $d->id }}" method="post"
                                                 class="d-inline">

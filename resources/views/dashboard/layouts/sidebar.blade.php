@@ -99,6 +99,12 @@
                         <i class="bi bi-clipboard2-pulse"></i><span>Jadwal</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('administrator/semester*') ? 'active' : 'collapsed' }}"
+                        href="/administrator/semester">
+                        <i class="bi bi-clipboard2-pulse"></i><span>Semester</span>
+                    </a>
+                </li>
             @endcannot
             <!-- End Forms Nav -->
         @endcan

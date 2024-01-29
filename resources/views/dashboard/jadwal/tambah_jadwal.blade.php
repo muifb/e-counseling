@@ -88,7 +88,7 @@
                                             <div class="col-sm-12">
                                                 <input type="text" name="sub_sabtu" id="subSabtu"
                                                     class="form-control form-control-sm @error('sub_sabtu') is-invalid @enderror"
-                                                    value="{{ old('sub_sabtu') }}" placeholder="Sub Teme Sabtu" required>
+                                                    value="{{ old('sub_sabtu') }}" placeholder="Sub Tema Sabtu" required>
                                             </div>
                                         </td>
                                         <td>
@@ -107,7 +107,7 @@
                                                 <select name="minggu" id="minggu"
                                                     class="form-select form-select-sm @error('minggu') is-invalid @enderror"
                                                     required>
-                                                    <option value="" selected>Pilih Tema Ahad</option>
+                                                    <option value="" selected>Pilih Tema minggu</option>
                                                     @foreach ($tema as $t)
                                                         @if (old('minggu') == $t->nama_tema)
                                                             <option value="{{ $t->nama_tema }}" selected>
@@ -123,14 +123,14 @@
                                         </td>
                                         <td>
                                             <div class="col-sm-12">
-                                                <input type="text" name="sub_minggu" id="subMinggu"
+                                                <input type="text" name="sub_minggu" id="subminggu"
                                                     class="form-control form-control-sm @error('sub_minggu') is-invalid @enderror"
-                                                    value="{{ old('sub_minggu') }}" placeholder="Sub Teme Ahad" required>
+                                                    value="{{ old('sub_minggu') }}" placeholder="Sub Tema minggu" required>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="col-sm-12">
-                                                <input class="form-control form-control-sm" name="ket_minggu" id="ketMinggu"
+                                                <input class="form-control form-control-sm" name="ket_minggu" id="ketminggu"
                                                     value="{{ old('ket_minggu') }}">
                                             </div>
                                         </td>

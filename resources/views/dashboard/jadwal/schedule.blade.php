@@ -105,7 +105,7 @@
                             </tr>
 
                             <tr class="table-danger">
-                                <td>Jumat</td>
+                                <td>Minggu</td>
                                 <td colspan="3" class="text-center">Libur</td>
                             </tr>
                         </tbody>
@@ -180,7 +180,7 @@
                                 </tr>
                                 <tr>
                                     <td>Minggu</td>
-                                    <td>{{ $item2->minggu }}</td>
+                                    <td>{{ $item2->Minggu }}</td>
                                     <td>{{ $item2->sub_minggu }}</td>
                                     <td>{{ $item2->ket_minggu }}</td>
                                 </tr>
@@ -210,7 +210,7 @@
                                 </tr>
 
                                 <tr class="table-danger">
-                                    <td>Jumat</td>
+                                    <td>Minggu</td>
                                     <td colspan="3" class="text-center">Libur</td>
                                 </tr>
                             </tbody>

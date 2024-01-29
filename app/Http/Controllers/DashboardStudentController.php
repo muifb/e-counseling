@@ -56,21 +56,29 @@ class DashboardStudentController extends Controller
      */
     public function store(Request $request)
     {
-        // ddd($request);
         $validatedData = $request->validate([
             'tanggal' => 'required',
             'tema_id' => 'required',
+            'siswa_id' => 'required',
+            'semester' => 'required',
             'keterangan' => 'required|min:5',
             'star_rated' => 'required',
             'photo.*' => 'mimes:mp4,mp4v,mpg4,avi,movie,mov,jpg,jpeg,png,gif,svg,webp'
         ]);
 
+        // return $validatedData;
 
-        $validatedData['siswa_id'] = $request['siswa_id'];
+        // $validatedData['siswa_id'] = $request['siswa_id'];
         $validatedData['guru_id'] = auth()->user()->guru->id;
         $validatedData['status_perkembangan'] = 'NULL';
 
+        $pertemuan = Perkembangan::where('siswa_id', $request->siswa_id)->where('tema_id', $request->tema_id)->where('semester', $request->semester)->get();
         $tema = Tema::find($request['tema_id']);
+        // return $tema->pertemuan;
+        if ($pertemuan && count($pertemuan) >= $tema->pertemuan) {
+            return back()->with('danger', 'Jumlah pertemuan Tema <strong>' . $tema->nama_tema . '</strong> Semester <strong>' . $request->semester . '</strong> sudah memenuhi, tidak dapat kirim perkembangan kembali.');
+        }
+
         $Perkembangan = Perkembangan::create($validatedData);
         $images = $request->file('photo');
         if ($request->hasFile('photo')) {
@@ -121,8 +129,10 @@ class DashboardStudentController extends Controller
      */
     public function show(Siswa $learning)
     {
-        return view('dashboard.pages.detail_conselling', [
-            'data'  =>  Perkembangan::where('siswa_id', $learning->id)->latest()->simplePaginate(3),
+        $Perkembangan = Perkembangan::where('siswa_id', $learning->id)->latest()->simplePaginate(3);
+        // return $Perkembangan->first();
+        return view('dashboard.pages.detail_perkembangan', [
+            'data'  =>  $Perkembangan,
             'siswa' =>  $learning
         ]);
     }

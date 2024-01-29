@@ -68,7 +68,7 @@
                                             <td>{{ $jadwal->first()->ket_sabtu }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Ahad</td>
+                                            <td>minggu</td>
                                             <td>{{ $jadwal->first()->minggu }}</td>
                                             <td>{{ $jadwal->first()->sub_minggu }}</td>
                                             <td>{{ $jadwal->first()->ket_minggu }}</td>
@@ -105,7 +105,7 @@
                                         </tr>
                                     @endif
                                     <tr class="table-danger">
-                                        <td>Jumat</td>
+                                        <td>Minggu</td>
                                         <td colspan="3" class="text-center">Libur</td>
                                     </tr>
                                 </tbody>

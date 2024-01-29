@@ -31,4 +31,9 @@ class Guru extends Model
     {
         return $this->hasMany(Report::class);
     }
+
+    public function perkembangan()
+    {
+        return $this->hasMany(Perkembangan::class)->latest();
+    }
 }

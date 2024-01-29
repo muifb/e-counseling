@@ -77,7 +77,7 @@
                             <div class="col-md-8">
                                 <div class="row align-items-center">
                                     <div class="card-body">
-                                        <h5 class="card-title mb-0 pt-1 pb-2">{{ $data->nama }}</h5>
+                                        <h5 class="card-title mb-0 py-1">{{ $data->nama }}</h5>
                                         <div class="breadcrumb m-0 p-0">
                                             <span class="breadcrumb-item">Nis : {{ $data->no_induk }}</span>
                                         </div>
@@ -86,11 +86,15 @@
                                                 {{ $data->kelompok->nama_kelompok }}</span>
                                         </div>
                                         <div class="breadcrumb m-0 p-0">
+                                            <span class="breadcrumb-item">Semester :
+                                                {{ $semester->first()->semester }}</span>
+                                        </div>
+                                        {{-- <div class="breadcrumb m-0 p-0">
                                             <a class="breadcrumb-item" href="/dashboard/learnings/{{ $data->id }}">
                                                 Lihat Details
                                                 <i class="ri-arrow-right-double-line"></i>
                                             </a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -104,6 +108,7 @@
                             <label for="inputTanggal" class="col-sm-2 col-form-label">Tanggal</label>
                             <div class="col-sm-10">
                                 <input type="hidden" name="siswa_id" value="{{ $data->id }}">
+                                <input type="hidden" name="semester" value="{{ $semester->first()->semester }}">
                                 <input name="tanggal" class="flatpickr form-control input active"
                                     placeholder="Select Date.." tabindex="0" type="text" id="inputTanggal"
                                     readonly="readonly" required value="{{ old('tanggal') }}">
@@ -164,15 +169,34 @@
                             <label for="photo*" class="col-sm-2 col-form-label">Tambahkan Foto/Video</label>
                             <div class="col-sm-10">
                                 <div class="row ps-3 rounded" id="imagePreview">
-                                    @for ($i = 1; $i <= 4; $i++)
-                                        <label class="btn col-sm-1 mb-1 photo{{ $i }}"
-                                            for="photo{{ $i }}">
-                                            <i class="bi bi-plus-square fs-1 img-preview{{ $i }}"></i>
-                                        </label>
-                                        <input class="form-control" type="file" id="photo{{ $i }}"
-                                            style="display: none;" name="photo[]" multiple
-                                            onchange="previewImage({{ $i }})">
-                                    @endfor
+                                    <label class="btn col-sm-1 mb-1 photo1" for="photo1">
+                                        <i class="bi bi-plus-square fs-1 img-preview1"></i>
+                                        {{-- <img class="img-preview1 img-fluid rounded" alt=""
+                                            src="/img/image-add-solid-60.png"> --}}
+                                    </label>
+                                    <input class="form-control" type="file" id="photo1" style="display: none;"
+                                        name="photo[]" multiple onchange="previewImage1()">
+                                    <label class="btn col-sm-1 mb-1 photo2" for="photo2">
+                                        <i class="bi bi-plus-square fs-1 img-preview2"></i>
+                                        {{-- <img class="img-preview2 img-fluid rounded" alt=""
+                                            src="/img/image-add-solid-60.png"> --}}
+                                    </label>
+                                    <input class="form-control" type="file" id="photo2" style="display: none;"
+                                        name="photo[]" multiple onchange="previewImage2()">
+                                    <label class="btn col-sm-1 mb-1 photo3" for="photo3">
+                                        <i class="bi bi-plus-square fs-1 img-preview3"></i>
+                                        {{-- <img class="img-preview3 img-fluid rounded" alt=""
+                                            src="/img/image-add-solid-60.png"> --}}
+                                    </label>
+                                    <input class="form-control" type="file" id="photo3" style="display: none;"
+                                        name="photo[]" multiple onchange="previewImage3()">
+                                    <label class="btn col-sm-1 mb-1 photo4" for="photo4">
+                                        <i class="bi bi-plus-square fs-1 img-preview4"></i>
+                                        {{-- <img class="img-preview4 img-fluid rounded" alt=""
+                                            src="/img/image-add-solid-60.png"> --}}
+                                    </label>
+                                    <input class="form-control" type="file" id="photo4" style="display: none;"
+                                        name="photo[]" multiple onchange="previewImage4()">
                                 </div>
                                 @error('photo*')
                                     <p class="text-danger">

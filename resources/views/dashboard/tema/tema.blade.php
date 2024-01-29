@@ -25,6 +25,7 @@
                             <th scope="col"></th>
                             <th scope="col">Tema</th>
                             <th scope="col">Sentra</th>
+                            <th scope="col">Pertemuan</th>
                             <th scope="col">Semester</th>
                             <th scope="col">Option</th>
                         </tr>
@@ -35,7 +36,8 @@
                                 <th>{{ $loop->iteration }}</th>
                                 <td>{{ $tm->nama_tema }}</td>
                                 <td>{{ $tm->sentra }}</td>
-                                <td>{{ $tm->semester }} - {{ $tm->tahun_id != null ? $tm->tahun->tahun_ajaran : '' }}</td>
+                                <td>{{ $tm->pertemuan }}</td>
+                                <td>{{ $tm->semester }}</td>
                                 <td>
                                     <button class="btn btn-warning btn-sm edit-tema" data-bs-toggle="modal"
                                         data-bs-target="#edit-tema" data-id="{{ $tm->id }}"><i
@@ -86,21 +88,35 @@
                                     class="form-control @error('sentra') is-invalid @enderror" value="{{ old('sentra') }}"
                                     id="inputSentra" required>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <label for="inputSemester" class="form-label">Semester</label>
-                                <select name="semester" id="inputSemester"
+                                <input type="text" name="semester"
+                                    class="form-control @error('semester') is-invalid @enderror"
+                                    value="{{ old('semester', $semester->first()->semester) }}" id="inputSemester" readonly>
+                                {{-- <select name="semester" id="inputSemester"
                                     class="form-select @error('semester') is-invalid @enderror">
                                     @foreach ($semester as $item)
                                         <option>{{ $item['semester'] }}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
                                 @error('semester')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <label for="inputPertemuan" class="form-label">Jumlah Pertemuan</label>
+                                <input type="text" name="pertemuan"
+                                    class="form-control @error('pertemuan') is-invalid @enderror"
+                                    value="{{ old('pertemuan') }}" id="inputPertemuan" required>
+                                @error('pertemuan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            {{-- <div class="col-md-6">
                                 <label for="inputTahun" class="form-label">Tahun Akademik</label>
                                 <select name="tahun_id" id="inputTahun"
                                     class="form-select @error('tahun_id') is-invalid @enderror">
@@ -113,7 +129,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                             <div class="text-end">
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
@@ -143,7 +159,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    @if ($tahun->count())
+                    @if ($semester->count())
                         <form action="/administrator/tema/edit" class="row g-3 needs-validation" novalidate
                             method="post">
                             @csrf
@@ -160,38 +176,28 @@
                                     class="form-control @error('sentra') is-invalid @enderror"
                                     value="{{ old('sentra') }}" id="inputSentraEdit" required>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <label for="inputSemesterEdit" class="form-label">Semester</label>
-                                <select name="semester" id="inputSemesterEdit"
+                                <input type="text" name="semester"
+                                    class="form-control @error('semester') is-invalid @enderror"
+                                    value="{{ old('semester') }}" id="inputSemesterEdit" readonly>
+                                {{-- <select name="semester" id="inputSemesterEdit"
                                     class="form-select @error('semester') is-invalid @enderror">
                                     @foreach ($semester as $item)
                                         <option value="{{ $item['semester'] }}">{{ $item['semester'] }}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
                                 @error('semester')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
-                                <label for="inputTahunEdit" class="form-label">Tahun Akademik</label>
-                                <select name="tahun_id" id="inputTahunEdit"
-                                    class="form-select @error('tahun_id') is-invalid @enderror">
-                                    @foreach ($tahun as $th)
-                                        @if (old('tahun_id') == $th->id)
-                                            <option value="{{ $th->id }}" selected>{{ $th->tahun_ajaran }}
-                                            </option>
-                                        @else
-                                            <option value="{{ $th->id }}">{{ $th->tahun_ajaran }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                                @error('tahun_id')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                            <div class="col-md-4">
+                                <label for="inputPertemuanEdit" class="form-label">Jumlah Pertemuan</label>
+                                <input type="text" name="pertemuan"
+                                    class="form-control @error('pertemuan') is-invalid @enderror"
+                                    value="{{ old('pertemuan') }}" id="inputPertemuanEdit" required>
                             </div>
 
                             <div class="text-end">
@@ -206,7 +212,7 @@
                     @else
                         <div class="alert alert-info alert-dismissible fade show text-center my-5" role="alert">
                             <i class="bi bi-info-circle me-1"></i>
-                            <h4 class="alert-heading">Sebelum edit tema, silahkan menambahkan tahun ajaran terlebih dulu!
+                            <h4 class="alert-heading">Sebelum edit tema, silahkan menambahkan semester terlebih dulu!
                             </h4>
                         </div>
                     @endif

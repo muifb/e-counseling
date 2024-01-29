@@ -88,47 +88,6 @@
                     </div>
                 </div>
                 <hr>
-                @php
-                    $fileAgama = [];
-                    $fileMotorik = [];
-                    $fileKognitif = [];
-                    $fileSosial = [];
-                    $fileBahasa = [];
-                    $fileSeni = [];
-                    foreach ($report->detailReport as $files) {
-                        if (substr($files->file_fotovideo, 14, 9) == 'nilai-aga') {
-                            $fileAgama[] = [
-                                'tipe_file' => $files->tipe_file,
-                                'file_fotovideo' => $files->file_fotovideo,
-                            ];
-                        } elseif (substr($files->file_fotovideo, 14, 9) == 'nilai-mot') {
-                            $fileMotorik[] = [
-                                'tipe_file' => $files->tipe_file,
-                                'file_fotovideo' => $files->file_fotovideo,
-                            ];
-                        } elseif (substr($files->file_fotovideo, 14, 9) == 'nilai-kog') {
-                            $fileKognitif[] = [
-                                'tipe_file' => $files->tipe_file,
-                                'file_fotovideo' => $files->file_fotovideo,
-                            ];
-                        } elseif (substr($files->file_fotovideo, 14, 9) == 'nilai-sos') {
-                            $fileSosial[] = [
-                                'tipe_file' => $files->tipe_file,
-                                'file_fotovideo' => $files->file_fotovideo,
-                            ];
-                        } elseif (substr($files->file_fotovideo, 14, 9) == 'nilai-bah') {
-                            $fileBahasa[] = [
-                                'tipe_file' => $files->tipe_file,
-                                'file_fotovideo' => $files->file_fotovideo,
-                            ];
-                        } elseif (substr($files->file_fotovideo, 14, 9) == 'nilai-sen') {
-                            $fileSeni[] = [
-                                'tipe_file' => $files->tipe_file,
-                                'file_fotovideo' => $files->file_fotovideo,
-                            ];
-                        }
-                    }
-                @endphp
                 <h5 class="card-title">
                     Perkembangan Nilai Agama dan Moral
                 </h5>
@@ -136,18 +95,18 @@
                     {!! $report->nilai_agama !!}
                 </article>
                 <div class="row">
-                    @foreach ($fileAgama as $agama)
-                        @if ($agama['tipe_file'] == 'video')
+                    @foreach ($report->detailReport as $files)
+                        @if (substr($files->file_fotovideo, 14, 15) == 'video/nilai-aga')
                             <div class="col-md-3 p-2">
-                                <video src="{{ asset('storage/' . $agama['file_fotovideo']) }}" type="video/mp4" loop
+                                <video src="{{ asset('storage/' . $files->file_fotovideo) }}" type="video/mp4" loop
                                     class="hover-to-play w-100" controls>
                                 </video>
                             </div>
                         @endif
-                        @if ($agama['tipe_file'] == 'image')
+                        @if (substr($files->file_fotovideo, 14, 15) == 'image/nilai-aga')
                             <div class="col-md-3 p-2 portfolio-item">
                                 <div class="portfolio-img">
-                                    <img src="{{ asset('storage/' . $agama['file_fotovideo']) }}" alt="Profile"
+                                    <img src="{{ asset('storage/' . $files->file_fotovideo) }}" alt="Profile"
                                         class="img-fluid">
                                 </div>
                             </div>
@@ -162,18 +121,18 @@
                     {!! $report->motorik !!}
                 </article>
                 <div class="row">
-                    @foreach ($fileMotorik as $motorik)
-                        @if ($motorik['tipe_file'] == 'video')
+                    @foreach ($report->detailReport as $files)
+                        @if (substr($files->file_fotovideo, 14, 15) == 'video/nilai-mot')
                             <div class="col-md-3 p-2">
-                                <video src="{{ asset('storage/' . $motorik['file_fotovideo']) }}" type="video/mp4" loop
+                                <video src="{{ asset('storage/' . $files->file_fotovideo) }}" type="video/mp4" loop
                                     class="hover-to-play w-100" controls>
                                 </video>
                             </div>
                         @endif
-                        @if ($motorik['tipe_file'] == 'image')
+                        @if (substr($files->file_fotovideo, 14, 15) == 'image/nilai-mot')
                             <div class="col-md-3 p-2 portfolio-item">
                                 <div class="portfolio-img">
-                                    <img src="{{ asset('storage/' . $motorik['file_fotovideo']) }}" alt="Profile"
+                                    <img src="{{ asset('storage/' . $files->file_fotovideo) }}" alt="Profile"
                                         class="img-fluid">
                                 </div>
                             </div>
@@ -188,18 +147,18 @@
                     {!! $report->kognitif !!}
                 </article>
                 <div class="row">
-                    @foreach ($fileKognitif as $kognitif)
-                        @if ($kognitif['tipe_file'] == 'video')
+                    @foreach ($report->detailReport as $files)
+                        @if (substr($files->file_fotovideo, 14, 15) == 'video/nilai-kog')
                             <div class="col-md-3 p-2">
-                                <video src="{{ asset('storage/' . $kognitif['file_fotovideo']) }}" type="video/mp4" loop
+                                <video src="{{ asset('storage/' . $files->file_fotovideo) }}" type="video/mp4" loop
                                     class="hover-to-play w-100" controls>
                                 </video>
                             </div>
                         @endif
-                        @if ($kognitif['tipe_file'] == 'image')
+                        @if (substr($files->file_fotovideo, 14, 15) == 'image/nilai-kog')
                             <div class="col-md-3 p-2 portfolio-item">
                                 <div class="portfolio-img">
-                                    <img src="{{ asset('storage/' . $kognitif['file_fotovideo']) }}" alt="Profile"
+                                    <img src="{{ asset('storage/' . $files->file_fotovideo) }}" alt="Profile"
                                         class="img-fluid">
                                 </div>
                             </div>
@@ -214,18 +173,18 @@
                     {!! $report->sosial !!}
                 </article>
                 <div class="row">
-                    @foreach ($fileSosial as $sosial)
-                        @if ($sosial['tipe_file'] == 'video')
+                    @foreach ($report->detailReport as $files)
+                        @if (substr($files->file_fotovideo, 14, 15) == 'video/nilai-sos')
                             <div class="col-md-3 p-2">
-                                <video src="{{ asset('storage/' . $sosial['file_fotovideo']) }}" type="video/mp4" loop
+                                <video src="{{ asset('storage/' . $files->file_fotovideo) }}" type="video/mp4" loop
                                     class="hover-to-play w-100" controls>
                                 </video>
                             </div>
                         @endif
-                        @if ($sosial['tipe_file'] == 'image')
+                        @if (substr($files->file_fotovideo, 14, 15) == 'image/nilai-sos')
                             <div class="col-md-3 p-2 portfolio-item">
                                 <div class="portfolio-img">
-                                    <img src="{{ asset('storage/' . $sosial['file_fotovideo']) }}" alt="Profile"
+                                    <img src="{{ asset('storage/' . $files->file_fotovideo) }}" alt="Profile"
                                         class="img-fluid">
                                 </div>
                             </div>
@@ -240,18 +199,18 @@
                     {!! $report->bahasa !!}
                 </article>
                 <div class="row">
-                    @foreach ($fileBahasa as $bahasa)
-                        @if ($bahasa['tipe_file'] == 'video')
+                    @foreach ($report->detailReport as $files)
+                        @if (substr($files->file_fotovideo, 14, 15) == 'video/nilai-bah')
                             <div class="col-md-3 p-2">
-                                <video src="{{ asset('storage/' . $bahasa['file_fotovideo']) }}" type="video/mp4" loop
+                                <video src="{{ asset('storage/' . $files->file_fotovideo) }}" type="video/mp4" loop
                                     class="hover-to-play w-100" controls>
                                 </video>
                             </div>
                         @endif
-                        @if ($bahasa['tipe_file'] == 'image')
+                        @if (substr($files->file_fotovideo, 14, 15) == 'image/nilai-bah')
                             <div class="col-md-3 p-2 portfolio-item">
                                 <div class="portfolio-img">
-                                    <img src="{{ asset('storage/' . $bahasa['file_fotovideo']) }}" alt="Profile"
+                                    <img src="{{ asset('storage/' . $files->file_fotovideo) }}" alt="Profile"
                                         class="img-fluid">
                                 </div>
                             </div>
@@ -266,18 +225,18 @@
                     {!! $report->seni !!}
                 </article>
                 <div class="row">
-                    @foreach ($fileSeni as $seni)
-                        @if ($seni['tipe_file'] == 'video')
+                    @foreach ($report->detailReport as $files)
+                        @if (substr($files->file_fotovideo, 14, 15) == 'video/nilai-sen')
                             <div class="col-md-3 p-2">
-                                <video src="{{ asset('storage/' . $seni['file_fotovideo']) }}" type="video/mp4" loop
+                                <video src="{{ asset('storage/' . $files->file_fotovideo) }}" type="video/mp4" loop
                                     class="hover-to-play w-100" controls>
                                 </video>
                             </div>
                         @endif
-                        @if ($seni['tipe_file'] == 'image')
+                        @if (substr($files->file_fotovideo, 14, 15) == 'image/nilai-sen')
                             <div class="col-md-3 p-2 portfolio-item">
                                 <div class="portfolio-img">
-                                    <img src="{{ asset('storage/' . $seni['file_fotovideo']) }}" alt="Profile"
+                                    <img src="{{ asset('storage/' . $files->file_fotovideo) }}" alt="Profile"
                                         class="img-fluid">
                                 </div>
                             </div>

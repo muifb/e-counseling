@@ -71,6 +71,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/administrator/tema', [AdminController::class, 'tema']);
             Route::post('/administrator/tema', [AdminController::class, 'storeTema']);
             Route::get('/administrator/kelompok', [AdminController::class, 'kelompok']);
+            Route::get('/administrator/semester', [AdminController::class, 'semester']);
+            Route::post('/administrator/semester', [AdminController::class, 'storeSemester']);
+            Route::delete('/administrator/semester/{semester}', [AdminController::class, 'destroySemester']);
             Route::post('/administrator/kelompok/siswa', [AdminController::class, 'siswaMasukKelompok']);
             Route::put('/administrator/kelompok/siswa/hapus/{siswa}', [AdminController::class, 'hapusSiswa']);
             Route::put('/administrator/kelompok/siswas/hapus/{kelompok}', [AdminController::class, 'hapusSiswaKelompok']);
@@ -98,7 +101,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/dashboard/learnings/reject', [ReportController::class, 'reject']);
         Route::post('/dashboard/learnings/report', [ReportController::class, 'store']);
         Route::put('/dashboard/learnings/report/{report}', [ReportController::class, 'update']);
-        Route::get('/dashboard/learnings/report/{report}', [ReportController::class, 'show']);
+        Route::get('/dashboard/learnings/report/{siswa}', [ReportController::class, 'show']);
         Route::get('/dashboard/learnings/report/edit/{report}', [ReportController::class, 'edit']);
         Route::get('/dashboard/request-reports', [ReportController::class, 'index']);
         Route::get('/dashboard/request-reports/detail-report/{report}', [ReportController::class, 'showReport']);

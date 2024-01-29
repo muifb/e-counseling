@@ -52,9 +52,9 @@
                                             @foreach ($data->where('kelompok_id', $kelompok[0]->id) as $d)
                                                 @if ($d->report->count())
                                                     @if ($d->report->first()->status == 'ditolak')
-                                                        <tr class="table-danger">
-                                                        @elseif ($d->report->first()->status == 'menunggu')
-                                                        <tr class="table-warning">
+                                                        <tr class='table-danger'>
+                                                        @elseif($d->report->first()->status == 'menunggu')
+                                                        <tr class ='table-warning'>
                                                         @else
                                                         <tr>
                                                     @endif
@@ -75,10 +75,17 @@
                                                             <i class="ri-add-box-fill"></i> Rapor
                                                         </a>
                                                     @endcan
-                                                    <a href="/dashboard/learnings/{{ $d->id }}"
-                                                        class="btn btn-indigo btn-sm">Konseling
-                                                        <i class="ri-eye-line"></i>
-                                                    </a>
+                                                    <div class="note d-inline">
+                                                        <a href="/dashboard/learnings/{{ $d->id }}"
+                                                            class="btn btn-indigo btn-sm">Konseling
+                                                            <i class="ri-eye-line"></i>
+                                                        </a>
+                                                        @if ($d->Perkembangan->count() && App\Models\Pesan::where('perkembangan_id', $d->Perkembangan->first()->id)->count())
+                                                            <span class="badge bg-danger badge-note">
+                                                                {{ App\Models\Pesan::where('perkembangan_id', $d->Perkembangan->first()->id)->count() }}
+                                                            </span>
+                                                        @endif
+                                                    </div>
                                                     <a class="btn btn-success btn-sm"
                                                         href="/dashboard/learnings/see-report/{{ $d->id }}">Lihat
                                                         Rapor
@@ -166,9 +173,9 @@
                                                 @foreach ($data->where('kelompok_id', $item->id) as $d)
                                                     @if ($d->report->count())
                                                         @if ($d->report->first()->status == 'ditolak')
-                                                            <tr class="table-danger">
-                                                            @elseif ($d->report->first()->status == 'menunggu')
-                                                            <tr class="table-warning">
+                                                            <tr class='table-danger'>
+                                                            @elseif($d->report->first()->status == 'menunggu')
+                                                            <tr class ='table-warning'>
                                                             @else
                                                             <tr>
                                                         @endif
@@ -189,10 +196,17 @@
                                                                 <i class="ri-add-box-fill"></i> Rapor
                                                             </a>
                                                         @endcan
-                                                        <a href="/dashboard/learnings/{{ $d->id }}"
-                                                            class="btn btn-indigo btn-sm">konseling
-                                                            <i class="ri-eye-line"></i>
-                                                        </a>
+                                                        <div class="note d-inline">
+                                                            <a href="/dashboard/learnings/{{ $d->id }}"
+                                                                class="btn btn-indigo btn-sm">konseling
+                                                                <i class="ri-eye-line"></i>
+                                                            </a>
+                                                            @if ($d->Perkembangan->count() && App\Models\Pesan::where('perkembangan_id', $d->Perkembangan->first()->id)->count())
+                                                                <span class="badge bg-danger badge-note">
+                                                                    {{ App\Models\Pesan::where('perkembangan_id', $d->Perkembangan->first()->id)->count() }}
+                                                                </span>
+                                                            @endif
+                                                        </div>
                                                         <a class="btn btn-success btn-sm"
                                                             href="/dashboard/learnings/see-report/{{ $d->id }}">Lihat
                                                             Rapor

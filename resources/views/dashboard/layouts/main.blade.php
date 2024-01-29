@@ -94,6 +94,10 @@
                         <li class="breadcrumb-item active">
                             Tahun Ajaran
                         </li>
+                    @elseif (Request::is('administrator/semester'))
+                        <li class="breadcrumb-item active">
+                            Semester
+                        </li>
                     @elseif (Request::is('administrator/kelompok*'))
                         @if (Request::is('administrator/kelompok/siswa/*'))
                             <li class="breadcrumb-item"><a href="/administrator/kelompok">Kelompok</a></li>
@@ -175,7 +179,7 @@
         @if (session('danger'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <i class="bi bi-x-circle"></i>
-                {{ session('danger') }}
+                {!! session('danger') !!}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
