@@ -3,7 +3,9 @@
 --------------------------------------------------------------*/
 :root {
   scroll-behavior: smooth;
-  --bs-body-font-size: 0.8rem;
+  --bs-body-font-size: 0.9rem;
+  --bs-body-font-weight: 400;
+  --bs-body-line-height: 1;
   --bs-blue: #0061f2;
   --bs-indigo: #5800e8;
   --bs-purple: #6900c7;
@@ -137,8 +139,8 @@ h6 {
 # Main
 --------------------------------------------------------------*/
 #main {
-  margin-top: 45px;
-  padding: 20px;
+  margin-top: 35px;
+  padding: 17px;
   transition: all 0.3s;
 }
 
